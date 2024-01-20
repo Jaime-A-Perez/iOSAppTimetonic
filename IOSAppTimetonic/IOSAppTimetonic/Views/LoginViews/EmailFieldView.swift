@@ -10,6 +10,7 @@ import SwiftUI
 struct EmailFieldView: View {
     @State var emailUser = ""
     @State var isValidEmail = false
+    @State var didTouchFiel = false
     
     var body: some View {
         
@@ -26,12 +27,20 @@ struct EmailFieldView: View {
                     .frame(width: 300)
                     .tint(Color.primary)
                     .cornerRadius(12)
+                    .onTapGesture {
+                        didTouchFiel = true
+                    }
                 
-                Image(systemName: isValidEmail ? "checkmark.circle" : "x.circle" )
-                    .font(.title3)
-                    .foregroundStyle(isValidEmail ? .green : .red.opacity(0.7))
+                if didTouchFiel && emailUser != "" {
+                    Image(systemName: isValidEmail ? "checkmark.circle" : "x.circle" )
+                        .font(.title3)
+                        .foregroundStyle(isValidEmail ? .green : .red.opacity(0.7))
+                } else {
+                    HStack {}
+                }
             }
         }
+        .padding(.vertical, 10)
     }
 }
 
