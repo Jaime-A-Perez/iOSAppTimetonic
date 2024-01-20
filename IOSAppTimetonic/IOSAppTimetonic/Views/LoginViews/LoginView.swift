@@ -18,9 +18,11 @@ struct LoginView: View {
             Text("Timetonic")
                 .font(.largeTitle)
                 .fontWeight(.black)
+                .padding(.bottom, 10)
             
+            EmailFieldView()
             
-        }.padding()
+        }
     }
 }
 

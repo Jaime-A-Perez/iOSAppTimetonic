@@ -19,6 +19,8 @@
 		B9D8C40E2B5C22630089D95A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C40D2B5C22630089D95A /* LoginViewModel.swift */; };
 		B9D8C40F2B5C22630089D95A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C40D2B5C22630089D95A /* LoginViewModel.swift */; };
 		B9D8C4142B5C6A100089D95A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C4132B5C6A100089D95A /* LoginView.swift */; };
+		B9D8C4182B5C71E90089D95A /* EmailFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C4172B5C71E90089D95A /* EmailFieldView.swift */; };
+		B9D8C41A2B5C72010089D95A /* PasswordFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C4192B5C72010089D95A /* PasswordFieldView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		B9D8C4092B5C22290089D95A /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		B9D8C40D2B5C22630089D95A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		B9D8C4132B5C6A100089D95A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B9D8C4172B5C71E90089D95A /* EmailFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFieldView.swift; sourceTree = "<group>"; };
+		B9D8C4192B5C72010089D95A /* PasswordFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFieldView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				B9D8C3DF2B5C20E60089D95A /* ContentView.swift */,
-				B9D8C4132B5C6A100089D95A /* LoginView.swift */,
+				B9D8C4162B5C71720089D95A /* LoginViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -160,6 +164,16 @@
 				B9D8C40D2B5C22630089D95A /* LoginViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B9D8C4162B5C71720089D95A /* LoginViews */ = {
+			isa = PBXGroup;
+			children = (
+				B9D8C4132B5C6A100089D95A /* LoginView.swift */,
+				B9D8C4172B5C71E90089D95A /* EmailFieldView.swift */,
+				B9D8C4192B5C72010089D95A /* PasswordFieldView.swift */,
+			);
+			path = LoginViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +306,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9D8C4182B5C71E90089D95A /* EmailFieldView.swift in Sources */,
+				B9D8C41A2B5C72010089D95A /* PasswordFieldView.swift in Sources */,
 				B9D8C40E2B5C22630089D95A /* LoginViewModel.swift in Sources */,
 				B9D8C3E02B5C20E60089D95A /* ContentView.swift in Sources */,
 				B9D8C40A2B5C22290089D95A /* LoginModel.swift in Sources */,
