@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct PasswordFieldView: View {
-    @State var passwordUser = ""
-    @State var isValidPassword = true
+    @StateObject var loginViewModel : LoginViewModel
+
     @State var didTouchFiel = false
     
     var body: some View {
         
         VStack(alignment: .leading) {
-            Text("Password")
+            Text($loginViewModel.user.namePassword.wrappedValue)
                 .font(.title3)
             HStack {
-                SecureField("*********", text: $passwordUser)
+                SecureField("*********", text: $loginViewModel.user.password)
                     .font(.headline)
                     .keyboardType(.emailAddress)
                     .textInputAutocapitalization(.never)
@@ -31,10 +31,10 @@ struct PasswordFieldView: View {
                         didTouchFiel = true
                     }
                 
-                if didTouchFiel && passwordUser != "" {
-                    Image(systemName: isValidPassword ? "checkmark.circle" : "x.circle" )
+                if didTouchFiel && $loginViewModel.user.password.wrappedValue != "" {
+                    Image(systemName: loginViewModel.isValidPassword ? "checkmark.circle" : "x.circle" )
                         .font(.title3)
-                        .foregroundStyle(isValidPassword ? .green : .red.opacity(0.7))
+                        .foregroundStyle(loginViewModel.isValidPassword ? .green : .red.opacity(0.7))
                 } else {
                     HStack {}
                 }
@@ -42,6 +42,4 @@ struct PasswordFieldView: View {
         }.padding(.vertical, 10)
     }
 }
-#Preview {
-    PasswordFieldView()
-}
+

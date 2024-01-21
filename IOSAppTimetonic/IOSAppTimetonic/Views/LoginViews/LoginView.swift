@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
+    @StateObject private var loginViewModel = LoginViewModel()
+    
+    private let frameWidth: CGFloat = 300
 
     var body: some View {
         
@@ -26,16 +29,16 @@ struct LoginView: View {
                 
             Spacer()
             
-            EmailFieldView()
+            EmailFieldView(loginViewModel: loginViewModel)
             
-            PasswordFieldView()
+            PasswordFieldView(loginViewModel: loginViewModel)
             
-            LoginButtonView()
+            LoginButtonView(loginViewModel: loginViewModel)
             
             Spacer()
             Spacer()
             
-        }.frame(width: 300)
+        }.frame(width: frameWidth)
     }
 }
 

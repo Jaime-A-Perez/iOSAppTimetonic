@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginButtonView: View {
-    @State var areBothFieldsValid = false
+    @StateObject var loginViewModel : LoginViewModel
     
     var body: some View {
         HStack {
@@ -20,7 +20,7 @@ struct LoginButtonView: View {
                     .fontWeight(.heavy)
                     .frame(width: 100, height: 45)
                     .foregroundStyle(.white)
-                    .background( areBothFieldsValid ? Color.green : Color.gray)
+                    .background( loginViewModel.isValidEmail && loginViewModel.isValidPassword ? Color.green : Color.gray)
                     .cornerRadius(12)
             })
             .padding(.vertical, 13)
@@ -28,6 +28,4 @@ struct LoginButtonView: View {
     }
 }
 
-#Preview {
-    LoginButtonView()
-}
+

@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct EmailFieldView: View {
-    @State var emailUser = ""
-    @State var isValidEmail = false
+    @StateObject var loginViewModel : LoginViewModel
+    
     @State var didTouchFiel = false
     
     var body: some View {
         
         VStack(alignment: .leading) {
-            Text("Email")
+            Text($loginViewModel.user.nameEmail.wrappedValue)
                 .font(.title3)
             HStack {
-                TextField("email", text: $emailUser)
+                TextField($loginViewModel.user.nameEmail.wrappedValue.lowercased(), text: $loginViewModel.user.email)
                     .font(.headline)
                     .keyboardType(.emailAddress)
                     .textInputAutocapitalization(.never)
@@ -31,10 +31,10 @@ struct EmailFieldView: View {
                         didTouchFiel = true
                     }
                 
-                if didTouchFiel && emailUser != "" {
-                    Image(systemName: isValidEmail ? "checkmark.circle" : "x.circle" )
+                if didTouchFiel && $loginViewModel.user.email.wrappedValue != "" {
+                    Image(systemName: loginViewModel.isValidEmail ? "checkmark.circle" : "x.circle" )
                         .font(.title3)
-                        .foregroundStyle(isValidEmail ? .green : .red.opacity(0.7))
+                        .foregroundStyle(loginViewModel.isValidEmail ? .green : .red.opacity(0.7))
                 } else {
                     HStack {}
                 }
@@ -44,6 +44,4 @@ struct EmailFieldView: View {
     }
 }
 
-#Preview {
-    EmailFieldView()
-}
+
