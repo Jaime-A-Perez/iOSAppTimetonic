@@ -15,10 +15,13 @@ struct EmailFieldView: View {
     var body: some View {
         
         VStack(alignment: .leading) {
-            Text($loginViewModel.user.nameEmail.wrappedValue)
+            Text($loginViewModel.user.nameEmail.wrappedValue)// Display the label for the email field
                 .font(.title3)
+            
             HStack {
+                // Email input field
                 TextField($loginViewModel.user.nameEmail.wrappedValue.lowercased(), text: $loginViewModel.user.email)
+                    .accessibilityIdentifier("emailTextField")
                     .font(.headline)
                     .keyboardType(.emailAddress)
                     .textInputAutocapitalization(.never)
@@ -31,8 +34,10 @@ struct EmailFieldView: View {
                         didTouchFiel = true
                     }
                 
+                // Conditional display of validation icon based on email field input
                 if didTouchFiel && $loginViewModel.user.email.wrappedValue != "" {
                     Image(systemName: loginViewModel.isValidEmail ? "checkmark.circle" : "x.circle" )
+                        .accessibilityIdentifier("emailValidationIcon")
                         .font(.title3)
                         .foregroundStyle(loginViewModel.isValidEmail ? .green : .red.opacity(0.7))
                 } else {

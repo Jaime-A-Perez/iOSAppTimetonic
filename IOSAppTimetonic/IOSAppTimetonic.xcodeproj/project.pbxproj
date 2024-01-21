@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B95870C52B5D7A2D00BCD597 /* PasswordFieldViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95870C42B5D7A2D00BCD597 /* PasswordFieldViewUITests.swift */; };
+		B95870C72B5D7CDB00BCD597 /* LoginButtonViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95870C62B5D7CDB00BCD597 /* LoginButtonViewUITests.swift */; };
+		B98CC5732B5D6CD200E15FAD /* EmailFieldViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */; };
 		B9D8C3DE2B5C20E60089D95A /* IOSAppTimetonicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C3DD2B5C20E60089D95A /* IOSAppTimetonicApp.swift */; };
 		B9D8C3E02B5C20E60089D95A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C3DF2B5C20E60089D95A /* ContentView.swift */; };
 		B9D8C3E22B5C20E70089D95A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9D8C3E12B5C20E70089D95A /* Assets.xcassets */; };
@@ -49,6 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B95870C42B5D7A2D00BCD597 /* PasswordFieldViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFieldViewUITests.swift; sourceTree = "<group>"; };
+		B95870C62B5D7CDB00BCD597 /* LoginButtonViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonViewUITests.swift; sourceTree = "<group>"; };
+		B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFieldViewUITests.swift; sourceTree = "<group>"; };
 		B9D8C3DA2B5C20E60089D95A /* IOSAppTimetonic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSAppTimetonic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9D8C3DD2B5C20E60089D95A /* IOSAppTimetonicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSAppTimetonicApp.swift; sourceTree = "<group>"; };
 		B9D8C3DF2B5C20E60089D95A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +103,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B98CC56E2B5D63A600E15FAD /* LoginViews */ = {
+			isa = PBXGroup;
+			children = (
+				B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */,
+				B95870C42B5D7A2D00BCD597 /* PasswordFieldViewUITests.swift */,
+				B95870C62B5D7CDB00BCD597 /* LoginButtonViewUITests.swift */,
+			);
+			path = LoginViews;
+			sourceTree = "<group>";
+		};
 		B9D8C3D12B5C20E60089D95A = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +166,7 @@
 		B9D8C3F72B5C20E70089D95A /* IOSAppTimetonicUITests */ = {
 			isa = PBXGroup;
 			children = (
+				B98CC56E2B5D63A600E15FAD /* LoginViews */,
 				B9D8C3F82B5C20E70089D95A /* IOSAppTimetonicUITests.swift */,
 				B9D8C3FA2B5C20E70089D95A /* IOSAppTimetonicUITestsLaunchTests.swift */,
 			);
@@ -398,6 +415,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B95870C72B5D7CDB00BCD597 /* LoginButtonViewUITests.swift in Sources */,
+				B95870C52B5D7A2D00BCD597 /* PasswordFieldViewUITests.swift in Sources */,
+				B98CC5732B5D6CD200E15FAD /* EmailFieldViewUITests.swift in Sources */,
 				B9D8C3F92B5C20E70089D95A /* IOSAppTimetonicUITests.swift in Sources */,
 				B9D8C3FB2B5C20E70089D95A /* IOSAppTimetonicUITestsLaunchTests.swift in Sources */,
 			);
