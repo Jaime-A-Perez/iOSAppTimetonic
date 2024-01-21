@@ -26,6 +26,9 @@
 		B9D8C4212B5CA75C0089D95A /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C41F2B5CA75C0089D95A /* EmailValidator.swift */; };
 		B9D8C4232B5CA76D0089D95A /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C4222B5CA76D0089D95A /* PasswordValidator.swift */; };
 		B9D8C4242B5CA76D0089D95A /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C4222B5CA76D0089D95A /* PasswordValidator.swift */; };
+		B9D8C4292B5CBFC60089D95A /* EmailValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C4282B5CBFC60089D95A /* EmailValidatorTests.swift */; };
+		B9D8C42B2B5CC48A0089D95A /* PasswordValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C42A2B5CC48A0089D95A /* PasswordValidatorTests.swift */; };
+		B9D8C42D2B5CC50E0089D95A /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C42C2B5CC50E0089D95A /* LoginViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +67,9 @@
 		B9D8C41B2B5C90C20089D95A /* LoginButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonView.swift; sourceTree = "<group>"; };
 		B9D8C41F2B5CA75C0089D95A /* EmailValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
 		B9D8C4222B5CA76D0089D95A /* PasswordValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
+		B9D8C4282B5CBFC60089D95A /* EmailValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidatorTests.swift; sourceTree = "<group>"; };
+		B9D8C42A2B5CC48A0089D95A /* PasswordValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidatorTests.swift; sourceTree = "<group>"; };
+		B9D8C42C2B5CC50E0089D95A /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +141,7 @@
 		B9D8C3ED2B5C20E70089D95A /* IOSAppTimetonicTests */ = {
 			isa = PBXGroup;
 			children = (
+				B9D8C4252B5CBF570089D95A /* ViewModels */,
 				B9D8C3EE2B5C20E70089D95A /* IOSAppTimetonicTests.swift */,
 			);
 			path = IOSAppTimetonicTests;
@@ -201,6 +208,32 @@
 				B9D8C4222B5CA76D0089D95A /* PasswordValidator.swift */,
 			);
 			path = Validators;
+			sourceTree = "<group>";
+		};
+		B9D8C4252B5CBF570089D95A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B9D8C4262B5CBF6E0089D95A /* LoginViewModelTests */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B9D8C4262B5CBF6E0089D95A /* LoginViewModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				B9D8C4272B5CBF920089D95A /* ValidatorsTests */,
+				B9D8C42C2B5CC50E0089D95A /* LoginViewModelTests.swift */,
+			);
+			path = LoginViewModelTests;
+			sourceTree = "<group>";
+		};
+		B9D8C4272B5CBF920089D95A /* ValidatorsTests */ = {
+			isa = PBXGroup;
+			children = (
+				B9D8C4282B5CBFC60089D95A /* EmailValidatorTests.swift */,
+				B9D8C42A2B5CC48A0089D95A /* PasswordValidatorTests.swift */,
+			);
+			path = ValidatorsTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,7 +385,10 @@
 			files = (
 				B9D8C3EF2B5C20E70089D95A /* IOSAppTimetonicTests.swift in Sources */,
 				B9D8C4212B5CA75C0089D95A /* EmailValidator.swift in Sources */,
+				B9D8C42B2B5CC48A0089D95A /* PasswordValidatorTests.swift in Sources */,
 				B9D8C4242B5CA76D0089D95A /* PasswordValidator.swift in Sources */,
+				B9D8C42D2B5CC50E0089D95A /* LoginViewModelTests.swift in Sources */,
+				B9D8C4292B5CBFC60089D95A /* EmailValidatorTests.swift in Sources */,
 				B9D8C40B2B5C22290089D95A /* LoginModel.swift in Sources */,
 				B9D8C40F2B5C22630089D95A /* LoginViewModel.swift in Sources */,
 			);
