@@ -22,6 +22,10 @@
 		B9D8C4182B5C71E90089D95A /* EmailFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C4172B5C71E90089D95A /* EmailFieldView.swift */; };
 		B9D8C41A2B5C72010089D95A /* PasswordFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C4192B5C72010089D95A /* PasswordFieldView.swift */; };
 		B9D8C41C2B5C90C20089D95A /* LoginButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C41B2B5C90C20089D95A /* LoginButtonView.swift */; };
+		B9D8C4202B5CA75C0089D95A /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C41F2B5CA75C0089D95A /* EmailValidator.swift */; };
+		B9D8C4212B5CA75C0089D95A /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C41F2B5CA75C0089D95A /* EmailValidator.swift */; };
+		B9D8C4232B5CA76D0089D95A /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C4222B5CA76D0089D95A /* PasswordValidator.swift */; };
+		B9D8C4242B5CA76D0089D95A /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C4222B5CA76D0089D95A /* PasswordValidator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +62,8 @@
 		B9D8C4172B5C71E90089D95A /* EmailFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFieldView.swift; sourceTree = "<group>"; };
 		B9D8C4192B5C72010089D95A /* PasswordFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFieldView.swift; sourceTree = "<group>"; };
 		B9D8C41B2B5C90C20089D95A /* LoginButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonView.swift; sourceTree = "<group>"; };
+		B9D8C41F2B5CA75C0089D95A /* EmailValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
+		B9D8C4222B5CA76D0089D95A /* PasswordValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,7 +169,7 @@
 		B9D8C40C2B5C22340089D95A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				B9D8C40D2B5C22630089D95A /* LoginViewModel.swift */,
+				B9D8C41D2B5CA7160089D95A /* LoginViewModel */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -177,6 +183,24 @@
 				B9D8C41B2B5C90C20089D95A /* LoginButtonView.swift */,
 			);
 			path = LoginViews;
+			sourceTree = "<group>";
+		};
+		B9D8C41D2B5CA7160089D95A /* LoginViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B9D8C41E2B5CA71E0089D95A /* Validators */,
+				B9D8C40D2B5C22630089D95A /* LoginViewModel.swift */,
+			);
+			path = LoginViewModel;
+			sourceTree = "<group>";
+		};
+		B9D8C41E2B5CA71E0089D95A /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				B9D8C41F2B5CA75C0089D95A /* EmailValidator.swift */,
+				B9D8C4222B5CA76D0089D95A /* PasswordValidator.swift */,
+			);
+			path = Validators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,10 +335,12 @@
 			files = (
 				B9D8C41C2B5C90C20089D95A /* LoginButtonView.swift in Sources */,
 				B9D8C4182B5C71E90089D95A /* EmailFieldView.swift in Sources */,
+				B9D8C4202B5CA75C0089D95A /* EmailValidator.swift in Sources */,
 				B9D8C41A2B5C72010089D95A /* PasswordFieldView.swift in Sources */,
 				B9D8C40E2B5C22630089D95A /* LoginViewModel.swift in Sources */,
 				B9D8C3E02B5C20E60089D95A /* ContentView.swift in Sources */,
 				B9D8C40A2B5C22290089D95A /* LoginModel.swift in Sources */,
+				B9D8C4232B5CA76D0089D95A /* PasswordValidator.swift in Sources */,
 				B9D8C4142B5C6A100089D95A /* LoginView.swift in Sources */,
 				B9D8C3DE2B5C20E60089D95A /* IOSAppTimetonicApp.swift in Sources */,
 			);
@@ -325,6 +351,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9D8C3EF2B5C20E70089D95A /* IOSAppTimetonicTests.swift in Sources */,
+				B9D8C4212B5CA75C0089D95A /* EmailValidator.swift in Sources */,
+				B9D8C4242B5CA76D0089D95A /* PasswordValidator.swift in Sources */,
 				B9D8C40B2B5C22290089D95A /* LoginModel.swift in Sources */,
 				B9D8C40F2B5C22630089D95A /* LoginViewModel.swift in Sources */,
 			);
