@@ -34,6 +34,8 @@ final class LoginButtonViewUITests: XCTestCase {
         configureLoginState(email: "test@example.com", password: "Password123!")
 
         let loginButton = app.buttons["loginButton"]
+        loginButton.tap() // Check if it is enabled
+        
         XCTAssertTrue(loginButton.isEnabled, "Login button should be enabled with valid credentials")
     }
     
@@ -42,6 +44,8 @@ final class LoginButtonViewUITests: XCTestCase {
         configureLoginState(email: "test.com", password: "123!")
 
         let loginButton = app.buttons["loginButton"]
+        loginButton.tap()
+        
         XCTAssertFalse(loginButton.isEnabled, "Login button should be disabled with invalid credentials")
     }
 
