@@ -15,10 +15,13 @@ struct PasswordFieldView: View {
     var body: some View {
         
         VStack(alignment: .leading) {
-            Text($loginViewModel.user.namePassword.wrappedValue)
+            Text($loginViewModel.user.namePassword.wrappedValue)// Display the label for the password field
                 .font(.title3)
+            
             HStack {
+                // Password input field
                 SecureField("*********", text: $loginViewModel.user.password)
+                    .accessibilityIdentifier("passwordSecureField")
                     .font(.headline)
                     .keyboardType(.emailAddress)
                     .textInputAutocapitalization(.never)
@@ -31,8 +34,10 @@ struct PasswordFieldView: View {
                         didTouchFiel = true
                     }
                 
+                // Conditional display of validation icon based on password field input
                 if didTouchFiel && $loginViewModel.user.password.wrappedValue != "" {
                     Image(systemName: loginViewModel.isValidPassword ? "checkmark.circle" : "x.circle" )
+                        .accessibilityIdentifier("passwordValidationIcon")
                         .font(.title3)
                         .foregroundStyle(loginViewModel.isValidPassword ? .green : .red.opacity(0.7))
                 } else {
