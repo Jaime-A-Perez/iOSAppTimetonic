@@ -10,7 +10,12 @@ import SwiftUI
 struct LoginView: View {
 
     var body: some View {
+        
         VStack{
+            
+            Spacer()
+            Spacer()
+            
             Text("Welcome!")
                 .font(.title2)
                 .bold()
@@ -18,12 +23,19 @@ struct LoginView: View {
             Text("Timetonic")
                 .font(.largeTitle)
                 .fontWeight(.black)
-                .padding(.bottom, 10)
+                
+            Spacer()
             
             EmailFieldView()
+            
             PasswordFieldView()
             
-        }
+            LoginButtonView()
+            
+            Spacer()
+            Spacer()
+            
+        }.frame(width: 300)
     }
 }
 

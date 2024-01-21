@@ -24,7 +24,7 @@ struct PasswordFieldView: View {
                     .textInputAutocapitalization(.never)
                     .padding()
                     .background(Color.primary.opacity(0.2))
-                    .frame(width: 300)
+                    .frame(width: 300, height: 45)
                     .tint(Color.primary)
                     .cornerRadius(12)
                     .onTapGesture {
