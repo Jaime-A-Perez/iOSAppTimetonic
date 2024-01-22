@@ -11,6 +11,10 @@
 		B95870C72B5D7CDB00BCD597 /* LoginButtonViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95870C62B5D7CDB00BCD597 /* LoginButtonViewUITests.swift */; };
 		B95870CC2B5DEA8600BCD597 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95870CB2B5DEA8600BCD597 /* Constants.swift */; };
 		B95870CD2B5DEA8600BCD597 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95870CB2B5DEA8600BCD597 /* Constants.swift */; };
+		B95870D02B5DF1D300BCD597 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95870CF2B5DF1D300BCD597 /* NetworkService.swift */; };
+		B95870D12B5DF1D300BCD597 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95870CF2B5DF1D300BCD597 /* NetworkService.swift */; };
+		B95870D42B5DF33100BCD597 /* AppKeyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95870D32B5DF33100BCD597 /* AppKeyResponseModel.swift */; };
+		B95870D52B5DF33100BCD597 /* AppKeyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95870D32B5DF33100BCD597 /* AppKeyResponseModel.swift */; };
 		B98CC5732B5D6CD200E15FAD /* EmailFieldViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */; };
 		B9D8C3DE2B5C20E60089D95A /* IOSAppTimetonicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C3DD2B5C20E60089D95A /* IOSAppTimetonicApp.swift */; };
 		B9D8C3E02B5C20E60089D95A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C3DF2B5C20E60089D95A /* ContentView.swift */; };
@@ -57,6 +61,8 @@
 		B95870C42B5D7A2D00BCD597 /* PasswordFieldViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFieldViewUITests.swift; sourceTree = "<group>"; };
 		B95870C62B5D7CDB00BCD597 /* LoginButtonViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonViewUITests.swift; sourceTree = "<group>"; };
 		B95870CB2B5DEA8600BCD597 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B95870CF2B5DF1D300BCD597 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		B95870D32B5DF33100BCD597 /* AppKeyResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyResponseModel.swift; sourceTree = "<group>"; };
 		B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFieldViewUITests.swift; sourceTree = "<group>"; };
 		B9D8C3DA2B5C20E60089D95A /* IOSAppTimetonic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSAppTimetonic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9D8C3DD2B5C20E60089D95A /* IOSAppTimetonicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSAppTimetonicApp.swift; sourceTree = "<group>"; };
@@ -122,6 +128,22 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		B95870CE2B5DF1AF00BCD597 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B95870CF2B5DF1D300BCD597 /* NetworkService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B95870D22B5DF30400BCD597 /* ResponseModels */ = {
+			isa = PBXGroup;
+			children = (
+				B95870D32B5DF33100BCD597 /* AppKeyResponseModel.swift */,
+			);
+			path = ResponseModels;
+			sourceTree = "<group>";
+		};
 		B98CC56E2B5D63A600E15FAD /* LoginViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				B9D8C3DD2B5C20E60089D95A /* IOSAppTimetonicApp.swift */,
+				B95870CE2B5DF1AF00BCD597 /* Services */,
 				B95870CA2B5DEA0900BCD597 /* Utilities */,
 				B9D8C4082B5C21ED0089D95A /* Models */,
 				B9D8C4072B5C21C40089D95A /* Views */,
@@ -205,6 +228,7 @@
 		B9D8C4082B5C21ED0089D95A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B95870D22B5DF30400BCD597 /* ResponseModels */,
 				B95870C92B5DE22A00BCD597 /* LoginModels */,
 			);
 			path = Models;
@@ -413,6 +437,8 @@
 				B9D8C40A2B5C22290089D95A /* LoginModel.swift in Sources */,
 				B9D8C4232B5CA76D0089D95A /* PasswordValidator.swift in Sources */,
 				B9D8C4142B5C6A100089D95A /* LoginView.swift in Sources */,
+				B95870D42B5DF33100BCD597 /* AppKeyResponseModel.swift in Sources */,
+				B95870D02B5DF1D300BCD597 /* NetworkService.swift in Sources */,
 				B9D8C3DE2B5C20E60089D95A /* IOSAppTimetonicApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -421,12 +447,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B95870D12B5DF1D300BCD597 /* NetworkService.swift in Sources */,
 				B9D8C3EF2B5C20E70089D95A /* IOSAppTimetonicTests.swift in Sources */,
 				B9D8C4212B5CA75C0089D95A /* EmailValidator.swift in Sources */,
 				B9D8C42B2B5CC48A0089D95A /* PasswordValidatorTests.swift in Sources */,
 				B9D8C4242B5CA76D0089D95A /* PasswordValidator.swift in Sources */,
 				B9D8C42D2B5CC50E0089D95A /* LoginViewModelTests.swift in Sources */,
 				B9D8C4292B5CBFC60089D95A /* EmailValidatorTests.swift in Sources */,
+				B95870D52B5DF33100BCD597 /* AppKeyResponseModel.swift in Sources */,
 				B9D8C40B2B5C22290089D95A /* LoginModel.swift in Sources */,
 				B9D8C40F2B5C22630089D95A /* LoginViewModel.swift in Sources */,
 				B95870CD2B5DEA8600BCD597 /* Constants.swift in Sources */,
