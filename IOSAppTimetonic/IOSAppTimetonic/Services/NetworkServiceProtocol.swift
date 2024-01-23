@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol NetworkServiceProtocol {
+    func createAppKey(completion: @escaping (Result<AppKeyResponseModel, NetworkError>) -> Void)
+}
