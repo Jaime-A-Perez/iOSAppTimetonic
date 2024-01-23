@@ -7,6 +7,7 @@
 
 import Foundation
 
+// Custom network errors
 enum NetworkError: Error {
     case invalidURL
     case networkError(Error)

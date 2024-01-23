@@ -7,8 +7,8 @@
 
 import Foundation
 
-// Network service for handling API requests
-class NetworkService {
+// Network service for handling API requests with implementation protocol
+class NetworkService: NetworkServiceProtocol {
     // URLSession dependency for network tasks
     private let session: URLSession
     
@@ -52,13 +52,5 @@ class NetworkService {
             
         }
         task.resume()
-    }
-    
-    // Custom network errors
-    enum NetworkError: Error {
-        case invalidURL
-        case networkError(Error)
-        case invalidResponse
-        case decodingError
     }
 }
