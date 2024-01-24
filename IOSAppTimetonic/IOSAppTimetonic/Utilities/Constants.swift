@@ -14,11 +14,11 @@ struct Constants {
     struct API {
         /// Constants related to network API
         
-        static let baseUrl = "https://api.timetonic.com"
+        static let baseUrl = "https://timetonic.com/live/api.php"
         
         // Endpoints
-        static let createAppKey = "/createAppkey"
-        static let createOauthkey = "/createOauthkey"
-        static let createSesskey = "/createSesskey"
+        static let createAppKey = "/?req=createAppkey"
+        static let createOauthkey = "/?req=createOauthkey"
+        static let createSesskey = "/?req=createSesskey"
     }
 }
