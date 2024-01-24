@@ -7,6 +7,12 @@
 
 import Foundation
 
+
+protocol NetworkServiceProtocol {
+    func createAppKey(completion: @escaping (Result<AppKeyResponseModel, NetworkError>) -> Void)
+}
+
+
 // Network service for handling API requests with implementation protocol
 class NetworkService: NetworkServiceProtocol {
     // URLSession dependency for network tasks
@@ -53,4 +59,11 @@ class NetworkService: NetworkServiceProtocol {
         }
         task.resume()
     }
+}
+
+enum NetworkError: Error {
+    case invalidURL
+    case networkError(Error)
+    case invalidResponse
+    case decodingError
 }
