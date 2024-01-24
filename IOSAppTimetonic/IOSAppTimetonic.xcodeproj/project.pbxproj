@@ -18,6 +18,7 @@
 		B98CC5732B5D6CD200E15FAD /* EmailFieldViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */; };
 		B9D7284F2B605EC6008F0EB4 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D7284E2B605EC6008F0EB4 /* NetworkServiceProtocol.swift */; };
 		B9D728512B606280008F0EB4 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D728502B606280008F0EB4 /* NetworkError.swift */; };
+		B9D728542B608729008F0EB4 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D728532B608729008F0EB4 /* MockURLProtocol.swift */; };
 		B9D8C3DE2B5C20E60089D95A /* IOSAppTimetonicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C3DD2B5C20E60089D95A /* IOSAppTimetonicApp.swift */; };
 		B9D8C3E02B5C20E60089D95A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C3DF2B5C20E60089D95A /* ContentView.swift */; };
 		B9D8C3E22B5C20E70089D95A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9D8C3E12B5C20E70089D95A /* Assets.xcassets */; };
@@ -68,6 +69,7 @@
 		B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFieldViewUITests.swift; sourceTree = "<group>"; };
 		B9D7284E2B605EC6008F0EB4 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		B9D728502B606280008F0EB4 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		B9D728532B608729008F0EB4 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		B9D8C3DA2B5C20E60089D95A /* IOSAppTimetonic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSAppTimetonic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9D8C3DD2B5C20E60089D95A /* IOSAppTimetonicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSAppTimetonicApp.swift; sourceTree = "<group>"; };
 		B9D8C3DF2B5C20E60089D95A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -160,6 +162,14 @@
 			path = LoginViews;
 			sourceTree = "<group>";
 		};
+		B9D728522B6086DA008F0EB4 /* ServicesTests */ = {
+			isa = PBXGroup;
+			children = (
+				B9D728532B608729008F0EB4 /* MockURLProtocol.swift */,
+			);
+			path = ServicesTests;
+			sourceTree = "<group>";
+		};
 		B9D8C3D12B5C20E60089D95A = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +216,7 @@
 		B9D8C3ED2B5C20E70089D95A /* IOSAppTimetonicTests */ = {
 			isa = PBXGroup;
 			children = (
+				B9D728522B6086DA008F0EB4 /* ServicesTests */,
 				B9D8C4252B5CBF570089D95A /* ViewModels */,
 				B9D8C3EE2B5C20E70089D95A /* IOSAppTimetonicTests.swift */,
 			);
@@ -458,6 +469,7 @@
 				B95870D12B5DF1D300BCD597 /* NetworkService.swift in Sources */,
 				B9D8C3EF2B5C20E70089D95A /* IOSAppTimetonicTests.swift in Sources */,
 				B9D8C4212B5CA75C0089D95A /* EmailValidator.swift in Sources */,
+				B9D728542B608729008F0EB4 /* MockURLProtocol.swift in Sources */,
 				B9D8C42B2B5CC48A0089D95A /* PasswordValidatorTests.swift in Sources */,
 				B9D8C4242B5CA76D0089D95A /* PasswordValidator.swift in Sources */,
 				B9D8C42D2B5CC50E0089D95A /* LoginViewModelTests.swift in Sources */,
