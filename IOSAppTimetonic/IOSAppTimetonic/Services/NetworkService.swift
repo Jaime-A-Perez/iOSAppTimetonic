@@ -10,6 +10,7 @@ import Foundation
 
 protocol NetworkServiceProtocol {
     func createAppKey(completion: @escaping (Result<AppKeyResponseModel, NetworkError>) -> Void)
+    func createOauthKey(login: String, pwd: String, appkey: String, completion: @escaping (Result<OauthKeyResponseModel, NetworkError>) -> Void)
 }
 
 
@@ -26,7 +27,7 @@ class NetworkService: NetworkServiceProtocol {
     // Create an AppKey
     func createAppKey(completion: @escaping (Result<AppKeyResponseModel, NetworkError>) -> Void) {
         
-        guard let url = URL(string: Constants.API.baseUrl + Constants.API.createAppKey) else {
+        guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.createAppKey)&appname=api") else {
             completion(.failure(.invalidURL))
             return
         }
@@ -43,7 +44,7 @@ class NetworkService: NetworkServiceProtocol {
             }
             
             // Validate the response and data
-            guard let data = data, let httpResponse = response as? HTTPURLResponse, (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) else {
+            guard let data = data, let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
                 completion(.failure(.invalidResponse))
                 return
             }
@@ -59,6 +60,53 @@ class NetworkService: NetworkServiceProtocol {
         }
         task.resume()
     }
+    
+    // Create an OauthKey
+    func createOauthKey(login: String, pwd: String, appkey: String, completion: @escaping (Result<OauthKeyResponseModel, NetworkError>) -> Void) {
+        
+        guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.createOauthkey)\(login)\(pwd)\(appkey)") else { return 
+        }
+        
+        // Configure the request
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // Configure request body
+        let requestBody = [
+            "login": login,
+            "pwd": pwd,
+            "appkey": appkey
+        ]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: requestBody)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // Perform the network task
+        let task = session.dataTask(with: request) {data, response, error in
+            if let error = error {
+                completion(.failure(.networkError(error)))
+                return
+            }
+            
+            // Validate the response and data
+            guard let data = data, let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(.invalidResponse))
+                return
+            }
+                        
+            // Decode the response
+            do {
+                let oAuthKeyResponse = try JSONDecoder().decode(OauthKeyResponseModel.self, from: data)
+                completion(.success(oAuthKeyResponse))
+            } catch {
+                completion(.failure(.decodingError))
+            }
+            
+        }
+        task.resume()
+        
+    }
+    
+    
 }
 
 enum NetworkError: Error {
