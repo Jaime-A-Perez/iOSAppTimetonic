@@ -10,7 +10,7 @@ import Combine
 
 protocol NetworkServiceProtocol {
     func createAppKey() -> AnyPublisher<AppKeyResponseModel, NetworkError>
-    func createOauthKey(login: String, pwd: String, appkey: String, completion: @escaping (Result<OauthKeyResponseModel, NetworkError>) -> Void)
+    func createOauthKey(login: String, pwd: String, appkey: String) -> AnyPublisher<OauthKeyResponseModel, NetworkError>
     func createSesskey(o_u: String, oauthkey: String, restrictions: String, completion: @escaping (Result<SessKeyResponseModel, NetworkError>) -> Void)
 }
 
@@ -55,49 +55,45 @@ class NetworkService: NetworkServiceProtocol {
     }
     
     // Create an OauthKey
-    func createOauthKey(login: String, pwd: String, appkey: String, completion: @escaping (Result<OauthKeyResponseModel, NetworkError>) -> Void) {
-        
-        guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.createOauthkey)") else { return
+    func createOauthKey(login: String, pwd: String, appkey: String) -> AnyPublisher<OauthKeyResponseModel, NetworkError> {
+        guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.createOauthkey)") else {
+            return Fail(error: .invalidURL).eraseToAnyPublisher()
         }
-        
         // Configure the request
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        
         // Configure request body
         let requestBody = [
             "login": login,
             "pwd": pwd,
             "appkey": appkey
         ]
-        request.httpBody = try? JSONSerialization.data(withJSONObject: requestBody)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        // Perform the network task
-        let task = session.dataTask(with: request) {data, response, error in
-            if let error = error {
-                completion(.failure(.networkError(error)))
-                return
-            }
-            
-            // Validate the response and data
-            guard let data = data, let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                completion(.failure(.invalidResponse))
-                return
-            }
-                        
-            // Decode the response
-            do {
-                let oAuthKeyResponse = try JSONDecoder().decode(OauthKeyResponseModel.self, from: data)
-                completion(.success(oAuthKeyResponse))
-            } catch {
-                completion(.failure(.decodingError))
-            }
-            
+
+        guard let requestBodyData = try? JSONSerialization.data(withJSONObject: requestBody) else {
+            return Fail(error: NetworkError.invalidRequest).eraseToAnyPublisher()
         }
-        task.resume()
-        
+
+        request.httpBody = requestBodyData
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        // Perform the network task
+        return session.dataTaskPublisher(for: request)
+            .mapError { NetworkError.networkError($0) }
+            .flatMap { data, response -> AnyPublisher<Data, NetworkError> in
+                // Validate the response
+                guard (200...299).contains((response as? HTTPURLResponse)?.statusCode ?? 0) else {
+                    return Fail(error: .invalidResponse).eraseToAnyPublisher()
+                }
+                return Just(data)
+                    .setFailureType(to: NetworkError.self)
+                    .eraseToAnyPublisher()
+            }
+        // Decode the response
+            .decode(type: OauthKeyResponseModel.self, decoder: JSONDecoder())
+            .mapError { _ in NetworkError.decodingError }
+            .eraseToAnyPublisher()
     }
+
+    
     
     // Create an Sesskey
     func createSesskey(o_u: String, oauthkey: String, restrictions: String, completion: @escaping (Result<SessKeyResponseModel, NetworkError>) -> Void) {
@@ -151,4 +147,5 @@ enum NetworkError: Error {
     case networkError(Error)
     case invalidResponse
     case decodingError
+    case invalidRequest
 }
