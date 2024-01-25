@@ -11,7 +11,7 @@ import Foundation
 protocol NetworkServiceProtocol {
     func createAppKey(completion: @escaping (Result<AppKeyResponseModel, NetworkError>) -> Void)
     func createOauthKey(login: String, pwd: String, appkey: String, completion: @escaping (Result<OauthKeyResponseModel, NetworkError>) -> Void)
-    func createSesskey(o_u: String, oauthkey: String, restrictions: String, completion: @escaping (Result<OauthKeyResponseModel, NetworkError>) -> Void)
+    func createSesskey(o_u: String, oauthkey: String, restrictions: String, completion: @escaping (Result<SessKeyResponseModel, NetworkError>) -> Void)
 }
 
 
@@ -108,7 +108,7 @@ class NetworkService: NetworkServiceProtocol {
     }
     
     // Create an Sesskey
-    func createSesskey(o_u: String, oauthkey: String, restrictions: String, completion: @escaping (Result<OauthKeyResponseModel, NetworkError>) -> Void) {
+    func createSesskey(o_u: String, oauthkey: String, restrictions: String, completion: @escaping (Result<SessKeyResponseModel, NetworkError>) -> Void) {
         
         guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.createSesskey)") else { return
         }
@@ -141,7 +141,7 @@ class NetworkService: NetworkServiceProtocol {
                         
             // Decode the response
             do {
-                let oAuthKeyResponse = try JSONDecoder().decode(OauthKeyResponseModel.self, from: data)
+                let oAuthKeyResponse = try JSONDecoder().decode(SessKeyResponseModel.self, from: data)
                 completion(.success(oAuthKeyResponse))
             } catch {
                 completion(.failure(.decodingError))

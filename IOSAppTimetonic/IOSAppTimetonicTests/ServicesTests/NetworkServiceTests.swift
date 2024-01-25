@@ -132,6 +132,64 @@ class NetworkServiceTests: XCTestCase {
 
         waitForExpectations(timeout: 5, handler: nil)
     }
+    
+    func testCreateSesskeySuccess() {
+        let mockResponse = HTTPURLResponse(url: URL(string: "\(Constants.API.baseUrl)\(Constants.API.createSesskey)")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        let mockJSON = """
+        {
+            "status": "ok",
+            "sesskey": "mXSl-Xp76-V1XH-K1ne-Jxg1-qiUF-JMih",
+            "id": "1019292",
+            "restrictions": {
+                "carnet_code": null,
+                "carnet_owner": null,
+                "readonly": false,
+                "hideTables": false,
+                "hideMessages": false,
+                "hideEvents": false,
+                "internal": false
+            },
+            "appName": "api",
+            "createdVNB": "live-6.49q/6.49",
+            "req": "createSesskey"
+        }
+        """
+        MockURLProtocol.mockResponse = mockResponse
+        MockURLProtocol.mockData = mockJSON.data(using: .utf8)
+
+        let expectation = self.expectation(description: "CreateSesskeySuccess")
+
+        networkService.createSesskey(o_u: "demo", oauthkey: "8QyG-XYJ5-sbmW-sDE1-Zpku-K1gP-Hz4t", restrictions: "") { result in
+            switch result {
+            case .success(let sessKeyResponse):
+                XCTAssertEqual(sessKeyResponse.sesskey, "mXSl-Xp76-V1XH-K1ne-Jxg1-qiUF-JMih", "Sesskey does not match expected value")
+                expectation.fulfill()
+            case .failure(let error):
+                XCTFail("Expected success, got error: \(error)")
+            }
+        }
+
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+
+    func testCreateSesskeyFailure() {
+        let error = NSError(domain: NSURLErrorDomain, code: NSURLErrorNotConnectedToInternet, userInfo: nil)
+        MockURLProtocol.mockError = error
+
+        let expectation = self.expectation(description: "CreateSesskeyFailure")
+
+        networkService.createSesskey(o_u: "demo", oauthkey: "8QyG-XYJ5-sbmW-sDE1-Zpku-K1gP-Hz4t", restrictions: "") { result in
+            switch result {
+            case .success(_):
+                XCTFail("Expected failure, but got success")
+            case .failure(let err as NSError):
+                XCTAssertEqual(err.code, 0)
+                expectation.fulfill()
+            }
+        }
+
+        waitForExpectations(timeout: 5, handler: nil)
+    }
 
 }
 
