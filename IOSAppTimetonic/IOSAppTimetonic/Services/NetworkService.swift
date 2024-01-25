@@ -11,6 +11,7 @@ import Foundation
 protocol NetworkServiceProtocol {
     func createAppKey(completion: @escaping (Result<AppKeyResponseModel, NetworkError>) -> Void)
     func createOauthKey(login: String, pwd: String, appkey: String, completion: @escaping (Result<OauthKeyResponseModel, NetworkError>) -> Void)
+    func createSesskey(o_u: String, oauthkey: String, restrictions: String, completion: @escaping (Result<OauthKeyResponseModel, NetworkError>) -> Void)
 }
 
 
@@ -64,7 +65,7 @@ class NetworkService: NetworkServiceProtocol {
     // Create an OauthKey
     func createOauthKey(login: String, pwd: String, appkey: String, completion: @escaping (Result<OauthKeyResponseModel, NetworkError>) -> Void) {
         
-        guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.createOauthkey)\(login)\(pwd)\(appkey)") else { return 
+        guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.createOauthkey)") else { return
         }
         
         // Configure the request
@@ -106,6 +107,50 @@ class NetworkService: NetworkServiceProtocol {
         
     }
     
+    // Create an Sesskey
+    func createSesskey(o_u: String, oauthkey: String, restrictions: String, completion: @escaping (Result<OauthKeyResponseModel, NetworkError>) -> Void) {
+        
+        guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.createSesskey)") else { return
+        }
+        
+        // Configure the request
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // Configure request body
+        let requestBody = [
+            "o_u": o_u,
+            "oauthkey": oauthkey,
+            "restrictions": restrictions
+        ]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: requestBody)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // Perform the network task
+        let task = session.dataTask(with: request) {data, response, error in
+            if let error = error {
+                completion(.failure(.networkError(error)))
+                return
+            }
+            
+            // Validate the response and data
+            guard let data = data, let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(.invalidResponse))
+                return
+            }
+                        
+            // Decode the response
+            do {
+                let oAuthKeyResponse = try JSONDecoder().decode(OauthKeyResponseModel.self, from: data)
+                completion(.success(oAuthKeyResponse))
+            } catch {
+                completion(.failure(.decodingError))
+            }
+            
+        }
+        task.resume()
+        
+    }
     
 }
 
