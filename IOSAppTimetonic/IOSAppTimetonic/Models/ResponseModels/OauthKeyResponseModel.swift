@@ -1,5 +1,5 @@
 //
-//  oAuthKeyResponseModel.swift
+//  OauthKeyResponseModel.swift
 //  IOSAppTimetonic
 //
 //  Created by Jaime A. Pérez R. on 24/01/24.

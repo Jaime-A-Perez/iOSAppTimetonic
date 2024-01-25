@@ -15,8 +15,9 @@
 		B95870D12B5DF1D300BCD597 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95870CF2B5DF1D300BCD597 /* NetworkService.swift */; };
 		B95870D42B5DF33100BCD597 /* AppKeyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95870D32B5DF33100BCD597 /* AppKeyResponseModel.swift */; };
 		B95870D52B5DF33100BCD597 /* AppKeyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95870D32B5DF33100BCD597 /* AppKeyResponseModel.swift */; };
+		B96973542B61EE8800DC68D1 /* OauthKeyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96973532B61EE8800DC68D1 /* OauthKeyResponseModel.swift */; };
+		B96973552B61EE8800DC68D1 /* OauthKeyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96973532B61EE8800DC68D1 /* OauthKeyResponseModel.swift */; };
 		B98CC5732B5D6CD200E15FAD /* EmailFieldViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */; };
-		B99D223D2B619B2B00DB5606 /* OauthKeyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99D223C2B619B2B00DB5606 /* OauthKeyResponseModel.swift */; };
 		B9D728542B608729008F0EB4 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D728532B608729008F0EB4 /* MockURLProtocol.swift */; };
 		B9D728582B608D8F008F0EB4 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D728572B608D8F008F0EB4 /* NetworkServiceTests.swift */; };
 		B9D8C3DE2B5C20E60089D95A /* IOSAppTimetonicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C3DD2B5C20E60089D95A /* IOSAppTimetonicApp.swift */; };
@@ -66,8 +67,8 @@
 		B95870CB2B5DEA8600BCD597 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B95870CF2B5DF1D300BCD597 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B95870D32B5DF33100BCD597 /* AppKeyResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyResponseModel.swift; sourceTree = "<group>"; };
+		B96973532B61EE8800DC68D1 /* OauthKeyResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthKeyResponseModel.swift; sourceTree = "<group>"; };
 		B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFieldViewUITests.swift; sourceTree = "<group>"; };
-		B99D223C2B619B2B00DB5606 /* OauthKeyResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthKeyResponseModel.swift; sourceTree = "<group>"; };
 		B9D728532B608729008F0EB4 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		B9D728572B608D8F008F0EB4 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 		B9D8C3DA2B5C20E60089D95A /* IOSAppTimetonic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSAppTimetonic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,7 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				B95870D32B5DF33100BCD597 /* AppKeyResponseModel.swift */,
-				B99D223C2B619B2B00DB5606 /* OauthKeyResponseModel.swift */,
+				B96973532B61EE8800DC68D1 /* OauthKeyResponseModel.swift */,
 			);
 			path = ResponseModels;
 			sourceTree = "<group>";
@@ -454,7 +455,7 @@
 				B9D8C40A2B5C22290089D95A /* LoginModel.swift in Sources */,
 				B9D8C4232B5CA76D0089D95A /* PasswordValidator.swift in Sources */,
 				B9D8C4142B5C6A100089D95A /* LoginView.swift in Sources */,
-				B99D223D2B619B2B00DB5606 /* OauthKeyResponseModel.swift in Sources */,
+				B96973542B61EE8800DC68D1 /* OauthKeyResponseModel.swift in Sources */,
 				B95870D42B5DF33100BCD597 /* AppKeyResponseModel.swift in Sources */,
 				B95870D02B5DF1D300BCD597 /* NetworkService.swift in Sources */,
 				B9D8C3DE2B5C20E60089D95A /* IOSAppTimetonicApp.swift in Sources */,
@@ -475,6 +476,7 @@
 				B9D8C4292B5CBFC60089D95A /* EmailValidatorTests.swift in Sources */,
 				B95870D52B5DF33100BCD597 /* AppKeyResponseModel.swift in Sources */,
 				B9D8C40B2B5C22290089D95A /* LoginModel.swift in Sources */,
+				B96973552B61EE8800DC68D1 /* OauthKeyResponseModel.swift in Sources */,
 				B9D8C40F2B5C22630089D95A /* LoginViewModel.swift in Sources */,
 				B9D728582B608D8F008F0EB4 /* NetworkServiceTests.swift in Sources */,
 				B95870CD2B5DEA8600BCD597 /* Constants.swift in Sources */,
