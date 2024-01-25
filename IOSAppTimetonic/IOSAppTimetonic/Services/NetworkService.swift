@@ -6,10 +6,10 @@
 //
 
 import Foundation
-
+import Combine
 
 protocol NetworkServiceProtocol {
-    func createAppKey(completion: @escaping (Result<AppKeyResponseModel, NetworkError>) -> Void)
+    func createAppKey() -> AnyPublisher<AppKeyResponseModel, NetworkError>
     func createOauthKey(login: String, pwd: String, appkey: String, completion: @escaping (Result<OauthKeyResponseModel, NetworkError>) -> Void)
     func createSesskey(o_u: String, oauthkey: String, restrictions: String, completion: @escaping (Result<SessKeyResponseModel, NetworkError>) -> Void)
 }
@@ -26,11 +26,10 @@ class NetworkService: NetworkServiceProtocol {
     }
     
     // Create an AppKey
-    func createAppKey(completion: @escaping (Result<AppKeyResponseModel, NetworkError>) -> Void) {
+    func createAppKey() -> AnyPublisher<AppKeyResponseModel, NetworkError> {
         
         guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.createAppKey)&appname=api") else {
-            completion(.failure(.invalidURL))
-            return
+            return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
         
         // Configure the request
@@ -38,28 +37,21 @@ class NetworkService: NetworkServiceProtocol {
         request.httpMethod = "POST"
         
         // Perform the network task
-        let task = session.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(.networkError(error)))
-                return
+        return session.dataTaskPublisher(for: request)
+            .mapError { NetworkError.networkError($0) }
+            .flatMap { data, response -> AnyPublisher<Data, NetworkError> in
+                // Validate the response
+                guard (200...299).contains((response as? HTTPURLResponse)?.statusCode ?? 0) else {
+                    return Fail(error: NetworkError.invalidResponse).eraseToAnyPublisher()
+                }
+                return Just(data)
+                    .setFailureType(to: NetworkError.self)
+                    .eraseToAnyPublisher()
             }
-            
-            // Validate the response and data
-            guard let data = data, let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                completion(.failure(.invalidResponse))
-                return
-            }
-            
             // Decode the response
-            do {
-                let appKeyResponse = try JSONDecoder().decode(AppKeyResponseModel.self, from: data)
-                completion(.success(appKeyResponse))
-            } catch {
-                completion(.failure(.decodingError))
-            }
-            
-        }
-        task.resume()
+            .decode(type: AppKeyResponseModel.self, decoder: JSONDecoder())
+            .mapError { _ in NetworkError.decodingError }
+            .eraseToAnyPublisher()
     }
     
     // Create an OauthKey

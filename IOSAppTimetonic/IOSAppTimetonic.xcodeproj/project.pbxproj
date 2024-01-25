@@ -20,6 +20,12 @@
 		B96973572B61FB7300DC68D1 /* SessKeyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96973562B61FB7300DC68D1 /* SessKeyResponseModel.swift */; };
 		B96973582B61FB7300DC68D1 /* SessKeyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96973562B61FB7300DC68D1 /* SessKeyResponseModel.swift */; };
 		B98CC5732B5D6CD200E15FAD /* EmailFieldViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */; };
+		B993FF952B62BD5D006C6BA7 /* AppKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993FF942B62BD5D006C6BA7 /* AppKeyViewModel.swift */; };
+		B993FF962B62BD5D006C6BA7 /* AppKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993FF942B62BD5D006C6BA7 /* AppKeyViewModel.swift */; };
+		B993FF982B62CAEE006C6BA7 /* OauthKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993FF972B62CAEE006C6BA7 /* OauthKeyViewModel.swift */; };
+		B993FF992B62CAEE006C6BA7 /* OauthKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993FF972B62CAEE006C6BA7 /* OauthKeyViewModel.swift */; };
+		B993FF9B2B62D45E006C6BA7 /* SessionKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993FF9A2B62D45E006C6BA7 /* SessionKeyViewModel.swift */; };
+		B993FF9C2B62D45E006C6BA7 /* SessionKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993FF9A2B62D45E006C6BA7 /* SessionKeyViewModel.swift */; };
 		B9D728542B608729008F0EB4 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D728532B608729008F0EB4 /* MockURLProtocol.swift */; };
 		B9D728582B608D8F008F0EB4 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D728572B608D8F008F0EB4 /* NetworkServiceTests.swift */; };
 		B9D8C3DE2B5C20E60089D95A /* IOSAppTimetonicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C3DD2B5C20E60089D95A /* IOSAppTimetonicApp.swift */; };
@@ -72,6 +78,9 @@
 		B96973532B61EE8800DC68D1 /* OauthKeyResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthKeyResponseModel.swift; sourceTree = "<group>"; };
 		B96973562B61FB7300DC68D1 /* SessKeyResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessKeyResponseModel.swift; sourceTree = "<group>"; };
 		B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFieldViewUITests.swift; sourceTree = "<group>"; };
+		B993FF942B62BD5D006C6BA7 /* AppKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyViewModel.swift; sourceTree = "<group>"; };
+		B993FF972B62CAEE006C6BA7 /* OauthKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthKeyViewModel.swift; sourceTree = "<group>"; };
+		B993FF9A2B62D45E006C6BA7 /* SessionKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionKeyViewModel.swift; sourceTree = "<group>"; };
 		B9D728532B608729008F0EB4 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		B9D728572B608D8F008F0EB4 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 		B9D8C3DA2B5C20E60089D95A /* IOSAppTimetonic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSAppTimetonic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,6 +173,16 @@
 				B95870C62B5D7CDB00BCD597 /* LoginButtonViewUITests.swift */,
 			);
 			path = LoginViews;
+			sourceTree = "<group>";
+		};
+		B993FF932B62BD11006C6BA7 /* NetworkServicesViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B993FF942B62BD5D006C6BA7 /* AppKeyViewModel.swift */,
+				B993FF972B62CAEE006C6BA7 /* OauthKeyViewModel.swift */,
+				B993FF9A2B62D45E006C6BA7 /* SessionKeyViewModel.swift */,
+			);
+			path = NetworkServicesViewModels;
 			sourceTree = "<group>";
 		};
 		B9D728522B6086DA008F0EB4 /* ServicesTests */ = {
@@ -259,6 +278,7 @@
 		B9D8C40C2B5C22340089D95A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				B993FF932B62BD11006C6BA7 /* NetworkServicesViewModels */,
 				B9D8C41D2B5CA7160089D95A /* LoginViewModel */,
 			);
 			path = ViewModels;
@@ -450,11 +470,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9D8C41C2B5C90C20089D95A /* LoginButtonView.swift in Sources */,
+				B993FF982B62CAEE006C6BA7 /* OauthKeyViewModel.swift in Sources */,
 				B95870CC2B5DEA8600BCD597 /* Constants.swift in Sources */,
 				B9D8C4182B5C71E90089D95A /* EmailFieldView.swift in Sources */,
 				B9D8C4202B5CA75C0089D95A /* EmailValidator.swift in Sources */,
 				B9D8C41A2B5C72010089D95A /* PasswordFieldView.swift in Sources */,
 				B9D8C40E2B5C22630089D95A /* LoginViewModel.swift in Sources */,
+				B993FF952B62BD5D006C6BA7 /* AppKeyViewModel.swift in Sources */,
 				B9D8C3E02B5C20E60089D95A /* ContentView.swift in Sources */,
 				B9D8C40A2B5C22290089D95A /* LoginModel.swift in Sources */,
 				B9D8C4232B5CA76D0089D95A /* PasswordValidator.swift in Sources */,
@@ -464,6 +486,7 @@
 				B95870D02B5DF1D300BCD597 /* NetworkService.swift in Sources */,
 				B96973572B61FB7300DC68D1 /* SessKeyResponseModel.swift in Sources */,
 				B9D8C3DE2B5C20E60089D95A /* IOSAppTimetonicApp.swift in Sources */,
+				B993FF9B2B62D45E006C6BA7 /* SessionKeyViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,11 +495,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B95870D12B5DF1D300BCD597 /* NetworkService.swift in Sources */,
+				B993FF992B62CAEE006C6BA7 /* OauthKeyViewModel.swift in Sources */,
 				B9D8C3EF2B5C20E70089D95A /* IOSAppTimetonicTests.swift in Sources */,
 				B9D8C4212B5CA75C0089D95A /* EmailValidator.swift in Sources */,
 				B9D728542B608729008F0EB4 /* MockURLProtocol.swift in Sources */,
 				B9D8C42B2B5CC48A0089D95A /* PasswordValidatorTests.swift in Sources */,
 				B9D8C4242B5CA76D0089D95A /* PasswordValidator.swift in Sources */,
+				B993FF962B62BD5D006C6BA7 /* AppKeyViewModel.swift in Sources */,
 				B9D8C42D2B5CC50E0089D95A /* LoginViewModelTests.swift in Sources */,
 				B9D8C4292B5CBFC60089D95A /* EmailValidatorTests.swift in Sources */,
 				B95870D52B5DF33100BCD597 /* AppKeyResponseModel.swift in Sources */,
@@ -486,6 +511,7 @@
 				B9D728582B608D8F008F0EB4 /* NetworkServiceTests.swift in Sources */,
 				B96973582B61FB7300DC68D1 /* SessKeyResponseModel.swift in Sources */,
 				B95870CD2B5DEA8600BCD597 /* Constants.swift in Sources */,
+				B993FF9C2B62D45E006C6BA7 /* SessionKeyViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
