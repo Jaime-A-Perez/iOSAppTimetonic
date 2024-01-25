@@ -17,6 +17,8 @@
 		B95870D52B5DF33100BCD597 /* AppKeyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95870D32B5DF33100BCD597 /* AppKeyResponseModel.swift */; };
 		B96973542B61EE8800DC68D1 /* OauthKeyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96973532B61EE8800DC68D1 /* OauthKeyResponseModel.swift */; };
 		B96973552B61EE8800DC68D1 /* OauthKeyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96973532B61EE8800DC68D1 /* OauthKeyResponseModel.swift */; };
+		B96973572B61FB7300DC68D1 /* SessKeyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96973562B61FB7300DC68D1 /* SessKeyResponseModel.swift */; };
+		B96973582B61FB7300DC68D1 /* SessKeyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96973562B61FB7300DC68D1 /* SessKeyResponseModel.swift */; };
 		B98CC5732B5D6CD200E15FAD /* EmailFieldViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */; };
 		B9D728542B608729008F0EB4 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D728532B608729008F0EB4 /* MockURLProtocol.swift */; };
 		B9D728582B608D8F008F0EB4 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D728572B608D8F008F0EB4 /* NetworkServiceTests.swift */; };
@@ -68,6 +70,7 @@
 		B95870CF2B5DF1D300BCD597 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B95870D32B5DF33100BCD597 /* AppKeyResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyResponseModel.swift; sourceTree = "<group>"; };
 		B96973532B61EE8800DC68D1 /* OauthKeyResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthKeyResponseModel.swift; sourceTree = "<group>"; };
+		B96973562B61FB7300DC68D1 /* SessKeyResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessKeyResponseModel.swift; sourceTree = "<group>"; };
 		B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFieldViewUITests.swift; sourceTree = "<group>"; };
 		B9D728532B608729008F0EB4 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		B9D728572B608D8F008F0EB4 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
@@ -148,6 +151,7 @@
 			children = (
 				B95870D32B5DF33100BCD597 /* AppKeyResponseModel.swift */,
 				B96973532B61EE8800DC68D1 /* OauthKeyResponseModel.swift */,
+				B96973562B61FB7300DC68D1 /* SessKeyResponseModel.swift */,
 			);
 			path = ResponseModels;
 			sourceTree = "<group>";
@@ -458,6 +462,7 @@
 				B96973542B61EE8800DC68D1 /* OauthKeyResponseModel.swift in Sources */,
 				B95870D42B5DF33100BCD597 /* AppKeyResponseModel.swift in Sources */,
 				B95870D02B5DF1D300BCD597 /* NetworkService.swift in Sources */,
+				B96973572B61FB7300DC68D1 /* SessKeyResponseModel.swift in Sources */,
 				B9D8C3DE2B5C20E60089D95A /* IOSAppTimetonicApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -479,6 +484,7 @@
 				B96973552B61EE8800DC68D1 /* OauthKeyResponseModel.swift in Sources */,
 				B9D8C40F2B5C22630089D95A /* LoginViewModel.swift in Sources */,
 				B9D728582B608D8F008F0EB4 /* NetworkServiceTests.swift in Sources */,
+				B96973582B61FB7300DC68D1 /* SessKeyResponseModel.swift in Sources */,
 				B95870CD2B5DEA8600BCD597 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
