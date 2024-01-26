@@ -1,5 +1,5 @@
 //
-//  AppKeyViewModel.swift
+//  SessionKeyViewModel.swift
 //  IOSAppTimetonic
 //
 //  Created by Jaime A. Pérez R. on 25/01/24.
@@ -8,27 +8,27 @@
 import Foundation
 import Combine
 
-class AppKeyViewModel {
+/// ViewModel for managing the session key creation process.
+class SessionKeyViewModel {
     // MARK: - Properties
-    @Published var isError: Bool = false
-    @Published var existAppKey: Bool = false
-    @Published var errorMessage: String?
-    @Published var appKey = ""
-
     private let networkService: NetworkServiceProtocol
+    @Published var sessionKey: SessKeyResponseModel?
+    @Published var isError: Bool = false
+    @Published var errorMessage: String?
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Initialization
-    /// Initializes the ViewModel with a network service
+    /// Initializes the ViewModel with a network service.
     init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
     }
 
     // MARK: - Business Logic
-    /// Fetches the appKey from the network service
-    func fetchAppKey() {
-        networkService.createAppKey()
-            .sink(receiveCompletion:  { [weak self] completion in
+    /// Creates a session key by making a network request.
+    func createSessionKey(o_u: String, oauthkey: String, restrictions: String) {
+        networkService.createSesskey(o_u: o_u, oauthkey: oauthkey, restrictions: restrictions)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                 case .finished:
                     break
@@ -36,16 +36,14 @@ class AppKeyViewModel {
                     self?.handleError(error)
                 }
             }, receiveValue: { [weak self] response in
-                self?.appKey = response.appkey
-                self?.existAppKey = true
+                self?.sessionKey = response
                 self?.isError = false
             })
             .store(in: &cancellables)
-        
     }
-        
+
     // MARK: - Error Handling
-    /// Handles errors from network service
+    /// Handles errors from network service.
     private func handleError(_ error: NetworkError) {
         self.isError = true
         switch error {
