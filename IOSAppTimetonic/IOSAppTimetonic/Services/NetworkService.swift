@@ -91,8 +91,6 @@ class NetworkService: NetworkServiceProtocol {
             .mapError { _ in NetworkError.decodingError }
             .eraseToAnyPublisher()
     }
-
-    
     
     // Create an Sesskey
     func createSesskey(o_u: String, oauthkey: String, restrictions: String) -> AnyPublisher<SessKeyResponseModel, NetworkError> {
