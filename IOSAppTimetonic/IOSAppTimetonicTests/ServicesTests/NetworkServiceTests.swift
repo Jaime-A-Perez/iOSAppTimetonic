@@ -6,10 +6,12 @@
 //
 
 import XCTest
+import Combine
 @testable import IOSAppTimetonic
 
 class NetworkServiceTests: XCTestCase {
     var networkService: NetworkService!
+    var cancellables = Set<AnyCancellable>()
 
     override func setUp() {
         super.setUp()
@@ -45,44 +47,40 @@ class NetworkServiceTests: XCTestCase {
         MockURLProtocol.mockData = mockJSON.data(using: .utf8)
 
         let expectation = self.expectation(description: "CreateAppKeySuccess")
-
-        networkService.createAppKey { result in
-            switch result {
-            case .success(_):
-                // Validate response content here
-                expectation.fulfill()
-            case .failure(_):
-                XCTFail("Expected success in the response")
-            }
+        
+        let publisher = networkService.createAppKey()
+        let cancelable = publisher.sink { _ in } receiveValue: { appKeyResponse in
+            XCTAssertEqual(appKeyResponse.appkey, "hZj4-rWlV-5Xv7-Airx-KXaC-D8Yp-CF7U")
+            expectation.fulfill()
         }
-
-        waitForExpectations(timeout: 5, handler: nil)
+        
+        waitForExpectations(timeout: 2)
+        cancelable.cancel()
     }
 
     func testCreateAppKeyFailure() {
         // Configure mock error for appkey creation
         let error = NSError(domain: NSURLErrorDomain, code: NSURLErrorNotConnectedToInternet, userInfo: nil)
         MockURLProtocol.mockError = error
-
+        
         let expectation = self.expectation(description: "FetchDataFailure")
-
-        networkService.createAppKey { result in
-            switch result {
-            case .success(_):
-                XCTFail("Expected an error in the response")
-            case .failure(let err as NSError):
-                print(err)
-                XCTAssertEqual(err.code, 0)
-                expectation.fulfill()
-            }
-        }
-
-        waitForExpectations(timeout: 5, handler: nil)
+        
+        let publisher = networkService.createAppKey()
+        let cancelable = publisher
+            .sink(receiveCompletion: { completion in
+                if case.failure(let error as NSError) = completion {
+                    XCTAssertEqual(error.code, 3)
+                    expectation.fulfill()
+                }
+            },   receiveValue: {_ in })
+        
+        wait(for: [expectation], timeout: 2)
+        cancelable.cancel()
     }
     
     func testCreateOauthKeySuccess() {
-        // Mock data for successful OAuth key creation
-        let mockResponse = HTTPURLResponse(url: URL(string: "https://example.com/createOauthKey")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        // Configure mock data and response for this specific test
+        let mockResponse = HTTPURLResponse(url: URL(string: "\(Constants.API.baseUrl)\(Constants.API.createOauthkey)")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
         let mockJSON = """
         {
             "status": "ok",
@@ -95,51 +93,47 @@ class NetworkServiceTests: XCTestCase {
         """
         MockURLProtocol.mockResponse = mockResponse
         MockURLProtocol.mockData = mockJSON.data(using: .utf8)
-
-        let expectation = self.expectation(description: "CreateOauthKeySuccess")
-
-        networkService.createOauthKey(login: "user@example.com", pwd: "password", appkey: "appkey123") { result in
-            switch result {
-            case .success(let oauthKey):
-                // Validate response content here
-                XCTAssertEqual(oauthKey.oauthkey, "8QyG-XYJ5-sbmW-sDE1-Zpku-K1gP-Hz4t", "OAuth key does not match expected value")
+        
+        let expectation = XCTestExpectation(description: "CreateOauthKeySuccess")
+        
+        let publisher = networkService.createOauthKey(login: "user@example.com", pwd: "Password12!", appkey: "hZj4-rWlV-5Xv7-Airx-KXaC-D8Yp-CF7U")
+        let cancelable = publisher.sink { _ in } receiveValue: { oauthKeyResponse in
+                XCTAssertEqual(oauthKeyResponse.oauthkey, "8QyG-XYJ5-sbmW-sDE1-Zpku-K1gP-Hz4t")
                 expectation.fulfill()
-            case .failure(let error):
-                XCTFail("Expected success in the response, got error: \(error)")
             }
-        }
-
-        waitForExpectations(timeout: 5, handler: nil)
+        
+        wait(for: [expectation], timeout: 2)
+        cancelable.cancel()
     }
-    
+
     func testCreateOauthKeyFailure() {
         // Configure mock error for appkey creation
         let error = NSError(domain: NSURLErrorDomain, code: NSURLErrorNotConnectedToInternet, userInfo: nil)
         MockURLProtocol.mockError = error
-
-        let expectation = self.expectation(description: "FetchDataFailure")
-
-        networkService.createOauthKey(login: "user@example.com", pwd: "password", appkey: "appkey123") { result in
-            switch result {
-            case .success(_):
-                XCTFail("Expected an error in the response")
-            case .failure(let err as NSError):
-                print(err)
-                XCTAssertEqual(err.code, 0)
-                expectation.fulfill()
-            }
-        }
-
-        waitForExpectations(timeout: 5, handler: nil)
+        
+        let expectation = XCTestExpectation(description: "CreateOauthKeyFailure")
+        
+        let publisher = networkService.createOauthKey(login: "example@ex.com", pwd: "Paswe!", appkey: "123")
+        let cancelable = publisher
+            .sink(receiveCompletion: {completion in
+                if case.failure(let error as NSError) = completion {
+                    XCTAssertEqual(error.code, 3)
+                    expectation.fulfill()
+                }
+            }, receiveValue: { _ in })
+        
+        wait(for: [expectation], timeout: 2)
+        cancelable.cancel()
     }
     
     func testCreateSesskeySuccess() {
+        // Configure mock data and response for this specific test
         let mockResponse = HTTPURLResponse(url: URL(string: "\(Constants.API.baseUrl)\(Constants.API.createSesskey)")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
         let mockJSON = """
         {
             "status": "ok",
-            "sesskey": "mXSl-Xp76-V1XH-K1ne-Jxg1-qiUF-JMih",
-            "id": "1019292",
+            "sesskey": "AwYJ-8Qvj-TMVk-8snb-H93K-iAPQ-SELY",
+            "id": "1020463",
             "restrictions": {
                 "carnet_code": null,
                 "carnet_owner": null,
@@ -159,37 +153,37 @@ class NetworkServiceTests: XCTestCase {
 
         let expectation = self.expectation(description: "CreateSesskeySuccess")
 
-        networkService.createSesskey(o_u: "demo", oauthkey: "8QyG-XYJ5-sbmW-sDE1-Zpku-K1gP-Hz4t", restrictions: "") { result in
-            switch result {
-            case .success(let sessKeyResponse):
-                XCTAssertEqual(sessKeyResponse.sesskey, "mXSl-Xp76-V1XH-K1ne-Jxg1-qiUF-JMih", "Sesskey does not match expected value")
-                expectation.fulfill()
-            case .failure(let error):
-                XCTFail("Expected success, got error: \(error)")
-            }
-        }
+        // Execute createSesskey function
+        let publisher = networkService.createSesskey(o_u: "demo", oauthkey: "8QyG-XYJ5-sbmW-sDE1-Zpku-K1gP-Hz4t", restrictions: "")
+        let cancellable = publisher.sink(receiveCompletion: { _ in }, receiveValue: { sessKeyResponse in
+            XCTAssertEqual(sessKeyResponse.sesskey, "AwYJ-8Qvj-TMVk-8snb-H93K-iAPQ-SELY")
+            expectation.fulfill()
+        })
 
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 2)
+        cancellable.cancel()
     }
 
     func testCreateSesskeyFailure() {
+        // Configure mock error for appkey creation
         let error = NSError(domain: NSURLErrorDomain, code: NSURLErrorNotConnectedToInternet, userInfo: nil)
         MockURLProtocol.mockError = error
 
         let expectation = self.expectation(description: "CreateSesskeyFailure")
 
-        networkService.createSesskey(o_u: "demo", oauthkey: "8QyG-XYJ5-sbmW-sDE1-Zpku-K1gP-Hz4t", restrictions: "") { result in
-            switch result {
-            case .success(_):
-                XCTFail("Expected failure, but got success")
-            case .failure(let err as NSError):
-                XCTAssertEqual(err.code, 0)
+        // Execute createSesskey function
+        let publisher = networkService.createSesskey(o_u: "demo", oauthkey: "8QyG-XYJ5-sbmW-sDE1-Zpku-K1gP-Hz4t", restrictions: "")
+        let cancellable = publisher.sink(receiveCompletion: { completion in
+            if case .failure(let error as NSError) = completion {
+                XCTAssertEqual(error.code, 3)
                 expectation.fulfill()
             }
-        }
-
-        waitForExpectations(timeout: 5, handler: nil)
+        }, receiveValue: { _ in })
+        
+        waitForExpectations(timeout: 2)
+        cancellable.cancel()
     }
+
 
 }
 
