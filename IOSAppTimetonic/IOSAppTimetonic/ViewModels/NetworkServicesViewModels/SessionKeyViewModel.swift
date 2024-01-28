@@ -11,10 +11,13 @@ import Combine
 /// ViewModel for managing the session key creation process.
 class SessionKeyViewModel {
     // MARK: - Properties
-    private let networkService: NetworkServiceProtocol
-    @Published var sessionKey: SessKeyResponseModel?
+//    @Published var sessionKey: SessKeyResponseModel?
     @Published var isError: Bool = false
+    @Published var existSesskey: Bool = false
     @Published var errorMessage: String?
+    @Published var sesskey = ""
+    
+    private let networkService: NetworkServiceProtocol
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Initialization
@@ -36,7 +39,8 @@ class SessionKeyViewModel {
                     self?.handleError(error)
                 }
             }, receiveValue: { [weak self] response in
-                self?.sessionKey = response
+                self?.sesskey = response.sesskey
+                self?.existSesskey = true
                 self?.isError = false
             })
             .store(in: &cancellables)
