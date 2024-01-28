@@ -14,6 +14,9 @@ class OauthKeyViewModel {
     @Published var isError: Bool = false
     @Published var existOauthKey: Bool = false
     @Published var errorMessage: String?
+    @Published var oauthKey = ""
+    
+    
     private let networkService: NetworkServiceProtocol
     private var cancellables = Set<AnyCancellable>()
 
@@ -36,7 +39,7 @@ class OauthKeyViewModel {
                     self?.handleError(error)
                 }
             }, receiveValue: { [weak self] response in
-                // Note: Consider reevaluating the flow and dependencies here.
+                self?.oauthKey = response.oauthkey
                 self?.existOauthKey = true
                 self?.isError = false
             })
