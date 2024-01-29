@@ -28,6 +28,8 @@
 		B9697D852B6742D7004845C6 /* TokenCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9697D832B6742D7004845C6 /* TokenCreator.swift */; };
 		B9697D872B674988004845C6 /* TokenReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9697D862B674988004845C6 /* TokenReader.swift */; };
 		B9697D882B674988004845C6 /* TokenReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9697D862B674988004845C6 /* TokenReader.swift */; };
+		B97EF74C2B67D7A70070A91F /* TokenUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97EF74B2B67D7A70070A91F /* TokenUpdate.swift */; };
+		B97EF74D2B67D7A70070A91F /* TokenUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97EF74B2B67D7A70070A91F /* TokenUpdate.swift */; };
 		B98CC5732B5D6CD200E15FAD /* EmailFieldViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */; };
 		B993FF952B62BD5D006C6BA7 /* AppKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993FF942B62BD5D006C6BA7 /* AppKeyViewModel.swift */; };
 		B993FF962B62BD5D006C6BA7 /* AppKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993FF942B62BD5D006C6BA7 /* AppKeyViewModel.swift */; };
@@ -94,6 +96,7 @@
 		B9697D7F2B673448004845C6 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		B9697D832B6742D7004845C6 /* TokenCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenCreator.swift; sourceTree = "<group>"; };
 		B9697D862B674988004845C6 /* TokenReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenReader.swift; sourceTree = "<group>"; };
+		B97EF74B2B67D7A70070A91F /* TokenUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenUpdate.swift; sourceTree = "<group>"; };
 		B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFieldViewUITests.swift; sourceTree = "<group>"; };
 		B993FF942B62BD5D006C6BA7 /* AppKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyViewModel.swift; sourceTree = "<group>"; };
 		B993FF972B62CAEE006C6BA7 /* OauthKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthKeyViewModel.swift; sourceTree = "<group>"; };
@@ -216,6 +219,7 @@
 			children = (
 				B9697D832B6742D7004845C6 /* TokenCreator.swift */,
 				B9697D862B674988004845C6 /* TokenReader.swift */,
+				B97EF74B2B67D7A70070A91F /* TokenUpdate.swift */,
 			);
 			path = TokenServices;
 			sourceTree = "<group>";
@@ -548,6 +552,7 @@
 				B9D8C3E02B5C20E60089D95A /* ContentView.swift in Sources */,
 				B9D8C40A2B5C22290089D95A /* LoginModel.swift in Sources */,
 				B9D8C4232B5CA76D0089D95A /* PasswordValidator.swift in Sources */,
+				B97EF74C2B67D7A70070A91F /* TokenUpdate.swift in Sources */,
 				B9D8C4142B5C6A100089D95A /* LoginView.swift in Sources */,
 				B9697D802B673448004845C6 /* KeychainService.swift in Sources */,
 				B96973542B61EE8800DC68D1 /* OauthKeyResponseModel.swift in Sources */,
@@ -563,6 +568,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B97EF74D2B67D7A70070A91F /* TokenUpdate.swift in Sources */,
 				B95870D12B5DF1D300BCD597 /* NetworkService.swift in Sources */,
 				B993FF992B62CAEE006C6BA7 /* OauthKeyViewModel.swift in Sources */,
 				B9D8C3EF2B5C20E70089D95A /* IOSAppTimetonicTests.swift in Sources */,
