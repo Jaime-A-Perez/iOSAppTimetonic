@@ -15,6 +15,7 @@ class TokenReader {
         self.keychainService = keychainService
     }
     
+    /// Retrieve a token to the keychain
     func retrieveToken(service: String, account: String) throws -> String? {
         let query = [
             kSecClass as String: kSecClassGenericPassword,
