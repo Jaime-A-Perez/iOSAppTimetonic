@@ -22,6 +22,8 @@
 		B9697D782B67104B004845C6 /* AppKeyViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9697D772B67104B004845C6 /* AppKeyViewModelTests.swift */; };
 		B9697D7A2B67191B004845C6 /* OauthKeyViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9697D792B67191B004845C6 /* OauthKeyViewModelTests.swift */; };
 		B9697D7C2B671EC2004845C6 /* SessionKeyViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9697D7B2B671EC2004845C6 /* SessionKeyViewModelTests.swift */; };
+		B9697D802B673448004845C6 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9697D7F2B673448004845C6 /* KeychainService.swift */; };
+		B9697D812B673448004845C6 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9697D7F2B673448004845C6 /* KeychainService.swift */; };
 		B98CC5732B5D6CD200E15FAD /* EmailFieldViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */; };
 		B993FF952B62BD5D006C6BA7 /* AppKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993FF942B62BD5D006C6BA7 /* AppKeyViewModel.swift */; };
 		B993FF962B62BD5D006C6BA7 /* AppKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993FF942B62BD5D006C6BA7 /* AppKeyViewModel.swift */; };
@@ -85,6 +87,7 @@
 		B9697D772B67104B004845C6 /* AppKeyViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyViewModelTests.swift; sourceTree = "<group>"; };
 		B9697D792B67191B004845C6 /* OauthKeyViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthKeyViewModelTests.swift; sourceTree = "<group>"; };
 		B9697D7B2B671EC2004845C6 /* SessionKeyViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionKeyViewModelTests.swift; sourceTree = "<group>"; };
+		B9697D7F2B673448004845C6 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFieldViewUITests.swift; sourceTree = "<group>"; };
 		B993FF942B62BD5D006C6BA7 /* AppKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyViewModel.swift; sourceTree = "<group>"; };
 		B993FF972B62CAEE006C6BA7 /* OauthKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthKeyViewModel.swift; sourceTree = "<group>"; };
@@ -159,7 +162,8 @@
 		B95870CE2B5DF1AF00BCD597 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				B95870CF2B5DF1D300BCD597 /* NetworkService.swift */,
+				B9697D7D2B673394004845C6 /* KeychainServices */,
+				B9697D7E2B6733A7004845C6 /* NetworkServices */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -182,6 +186,22 @@
 				B9697D7B2B671EC2004845C6 /* SessionKeyViewModelTests.swift */,
 			);
 			path = NetworkServicesViewModelsTests;
+			sourceTree = "<group>";
+		};
+		B9697D7D2B673394004845C6 /* KeychainServices */ = {
+			isa = PBXGroup;
+			children = (
+				B9697D7F2B673448004845C6 /* KeychainService.swift */,
+			);
+			path = KeychainServices;
+			sourceTree = "<group>";
+		};
+		B9697D7E2B6733A7004845C6 /* NetworkServices */ = {
+			isa = PBXGroup;
+			children = (
+				B95870CF2B5DF1D300BCD597 /* NetworkService.swift */,
+			);
+			path = NetworkServices;
 			sourceTree = "<group>";
 		};
 		B98CC56E2B5D63A600E15FAD /* LoginViews */ = {
@@ -511,6 +531,7 @@
 				B9D8C40A2B5C22290089D95A /* LoginModel.swift in Sources */,
 				B9D8C4232B5CA76D0089D95A /* PasswordValidator.swift in Sources */,
 				B9D8C4142B5C6A100089D95A /* LoginView.swift in Sources */,
+				B9697D802B673448004845C6 /* KeychainService.swift in Sources */,
 				B96973542B61EE8800DC68D1 /* OauthKeyResponseModel.swift in Sources */,
 				B95870D42B5DF33100BCD597 /* AppKeyResponseModel.swift in Sources */,
 				B95870D02B5DF1D300BCD597 /* NetworkService.swift in Sources */,
@@ -531,6 +552,7 @@
 				B9697D7A2B67191B004845C6 /* OauthKeyViewModelTests.swift in Sources */,
 				B9D728542B608729008F0EB4 /* MockURLProtocol.swift in Sources */,
 				B993FFA42B635411006C6BA7 /* FeedbackAuthViewModel.swift in Sources */,
+				B9697D812B673448004845C6 /* KeychainService.swift in Sources */,
 				B9697D7C2B671EC2004845C6 /* SessionKeyViewModelTests.swift in Sources */,
 				B9D8C42B2B5CC48A0089D95A /* PasswordValidatorTests.swift in Sources */,
 				B9D8C4242B5CA76D0089D95A /* PasswordValidator.swift in Sources */,
