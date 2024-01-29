@@ -54,4 +54,5 @@ enum KeychainError: Error {
     case deleteFailed(OSStatus)
     case copyMatchingFailed(OSStatus)
     case unexpectedDataFormat
+    case invalidTokenConversion
 }
