@@ -32,6 +32,8 @@
 		B97EF74D2B67D7A70070A91F /* TokenUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97EF74B2B67D7A70070A91F /* TokenUpdater.swift */; };
 		B97EF74F2B67DB5F0070A91F /* TokenDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97EF74E2B67DB5F0070A91F /* TokenDeleter.swift */; };
 		B97EF7502B67DB5F0070A91F /* TokenDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97EF74E2B67DB5F0070A91F /* TokenDeleter.swift */; };
+		B97EF7532B67F0A00070A91F /* AuthVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97EF7522B67F0A00070A91F /* AuthVerificationView.swift */; };
+		B97EF7542B67F0A00070A91F /* AuthVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97EF7522B67F0A00070A91F /* AuthVerificationView.swift */; };
 		B98CC5732B5D6CD200E15FAD /* EmailFieldViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */; };
 		B993FF952B62BD5D006C6BA7 /* AppKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993FF942B62BD5D006C6BA7 /* AppKeyViewModel.swift */; };
 		B993FF962B62BD5D006C6BA7 /* AppKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993FF942B62BD5D006C6BA7 /* AppKeyViewModel.swift */; };
@@ -100,6 +102,7 @@
 		B9697D862B674988004845C6 /* TokenReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenReader.swift; sourceTree = "<group>"; };
 		B97EF74B2B67D7A70070A91F /* TokenUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenUpdater.swift; sourceTree = "<group>"; };
 		B97EF74E2B67DB5F0070A91F /* TokenDeleter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDeleter.swift; sourceTree = "<group>"; };
+		B97EF7522B67F0A00070A91F /* AuthVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVerificationView.swift; sourceTree = "<group>"; };
 		B98CC5722B5D6CD200E15FAD /* EmailFieldViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFieldViewUITests.swift; sourceTree = "<group>"; };
 		B993FF942B62BD5D006C6BA7 /* AppKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyViewModel.swift; sourceTree = "<group>"; };
 		B993FF972B62CAEE006C6BA7 /* OauthKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthKeyViewModel.swift; sourceTree = "<group>"; };
@@ -228,6 +231,14 @@
 			path = TokenServices;
 			sourceTree = "<group>";
 		};
+		B97EF7512B67F06B0070A91F /* AuthVerificationViews */ = {
+			isa = PBXGroup;
+			children = (
+				B97EF7522B67F0A00070A91F /* AuthVerificationView.swift */,
+			);
+			path = AuthVerificationViews;
+			sourceTree = "<group>";
+		};
 		B98CC56E2B5D63A600E15FAD /* LoginViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -332,6 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				B9D8C3DF2B5C20E60089D95A /* ContentView.swift */,
+				B97EF7512B67F06B0070A91F /* AuthVerificationViews */,
 				B9D8C4162B5C71720089D95A /* LoginViews */,
 			);
 			path = Views;
@@ -548,6 +560,7 @@
 				B9697D872B674988004845C6 /* TokenReader.swift in Sources */,
 				B95870CC2B5DEA8600BCD597 /* Constants.swift in Sources */,
 				B9D8C4182B5C71E90089D95A /* EmailFieldView.swift in Sources */,
+				B97EF7532B67F0A00070A91F /* AuthVerificationView.swift in Sources */,
 				B9D8C4202B5CA75C0089D95A /* EmailValidator.swift in Sources */,
 				B9697D842B6742D7004845C6 /* TokenCreator.swift in Sources */,
 				B993FFA32B635411006C6BA7 /* FeedbackAuthViewModel.swift in Sources */,
@@ -598,6 +611,7 @@
 				B9D8C40F2B5C22630089D95A /* LoginViewModel.swift in Sources */,
 				B9D728582B608D8F008F0EB4 /* NetworkServiceTests.swift in Sources */,
 				B96973582B61FB7300DC68D1 /* SessKeyResponseModel.swift in Sources */,
+				B97EF7542B67F0A00070A91F /* AuthVerificationView.swift in Sources */,
 				B95870CD2B5DEA8600BCD597 /* Constants.swift in Sources */,
 				B993FF9C2B62D45E006C6BA7 /* SessionKeyViewModel.swift in Sources */,
 			);
