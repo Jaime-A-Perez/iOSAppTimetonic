@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct LoginButtonView: View {
-    @StateObject var loginViewModel : LoginViewModel
+    @StateObject var loginViewModel = LoginViewModel.shared
     @State var changeView = false
+    
+    let authVerificationViewModel = AuthVerificationViewModel.shared
     
     var body: some View {
         HStack {
@@ -17,6 +19,7 @@ struct LoginButtonView: View {
             // Login button
             Button(action: {
                 changeView = true
+                authVerificationViewModel.startAuthFetch()
             }, label: {
                 Text("Log In")
                     .fontWeight(.heavy)
@@ -35,5 +38,6 @@ struct LoginButtonView: View {
         }
     }
 }
+
 
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @StateObject private var loginViewModel = LoginViewModel()
+    var loginViewModel = LoginViewModel.shared
     
     private let frameWidth: CGFloat = 300
 
