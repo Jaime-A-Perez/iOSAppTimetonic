@@ -8,35 +8,53 @@
 import SwiftUI
 
 struct AuthVerificationView: View {
-    @State var isThereAnAnswer = false
-    @State var isAuthVerify = true
     
+    @StateObject var authVerificationViewModel = AuthVerificationViewModel.shared
     
-    var body: some View {
+    var body: some View { 
+        var subtitle: String {authVerificationViewModel.authenticationStatusMessage}
+        var authProcess: Bool {authVerificationViewModel.isAuthenticating}
+        var colorProgress: Int {authVerificationViewModel.authenticationIndicator}
+        var messageError: String {authVerificationViewModel.latestErrorMessage}
+        
         VStack{
             Spacer()
             Text("Authentication")
                 .font(.largeTitle)
-                .padding()
+                .padding(5)
+            
+            Text(subtitle)
+                .font(.title)
+            
             Spacer()
-            if isThereAnAnswer {
-                Image(systemName: isAuthVerify ? "checkmark.circle" : "x.circle")
-                    .resizable()
-                    .frame(width: 200, height: 200)
-                    .foregroundColor(isAuthVerify ? .green : .red.opacity(0.9))
-            } else {
+            
+            if authProcess{
                 ProgressView()
                     .scaleEffect(x:4, y:4, anchor: .center)
                     .padding()
+                    .tint(.green.opacity(Double(colorProgress + 1) * 0.33))
+            } else {
+                Image(systemName: messageError != "" ? "x.circle" : "checkmark.circle" )
+                    .resizable()
+                    .frame(width: 200, height: 200)
+                    .foregroundColor(messageError != "" ? .red : .green )
             }
+            
             Spacer()
-            Text(isAuthVerify ? "Verify" : "Error: ")
+            
+            Text(messageError == "" ? "Verified" : "Error: ")
+                .font(.largeTitle)
+                .padding()
+            
+            Text(messageError)
                 .font(.title)
                 .padding()
+           
             Spacer()
         }
     }
 }
+    
 
 #Preview {
     AuthVerificationView()
