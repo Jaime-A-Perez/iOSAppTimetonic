@@ -8,26 +8,29 @@
 import Foundation
 import Combine
 
-class AppKeyViewModel {
-    // MARK: - Properties
-    @Published var isError: Bool = false
-    @Published var existAppKey: Bool = false
-    @Published var errorMessage: String?
-    @Published var appKey = ""
 
+class AppKeyViewModel: AuthenticationAppKeyProcessProtocol {
+    // MARK: - Properties
+    @Published private(set) var state = AuthenticationState.idle
+    
     private let networkService: NetworkServiceProtocol
     private var cancellables = Set<AnyCancellable>()
-
+    
+    // MARK: - AuthenticationProcess Publisher
+    var statePublisher: Published<AuthenticationState>.Publisher { $state }
+    
     // MARK: - Initialization
     /// Initializes the ViewModel with a network service
     init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
     }
-
+        
     // MARK: - Business Logic
     /// Fetches the appKey from the network service
     func fetchAppKey() {
+        state = .loading
         networkService.createAppKey()
+            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion:  { [weak self] completion in
                 switch completion {
                 case .finished:
@@ -36,29 +39,27 @@ class AppKeyViewModel {
                     self?.handleError(error)
                 }
             }, receiveValue: { [weak self] response in
-                self?.appKey = response.appkey
-                self?.existAppKey = true
-                self?.isError = false
+                self?.state = .success(response.appkey, "")
             })
             .store(in: &cancellables)
-        
     }
-        
+    
     // MARK: - Error Handling
     /// Handles errors from network service
     private func handleError(_ error: NetworkError) {
-        self.isError = true
+        let errorMessage: String
         switch error {
         case .invalidURL:
-            self.errorMessage = "invalid URL Error"
+            errorMessage = "Invalid URL Error AppKey"
         case .networkError(let networkError):
-            self.errorMessage = networkError.localizedDescription
+            errorMessage = networkError.localizedDescription
         case .invalidResponse:
-            self.errorMessage = "invalid Response Error"
+            errorMessage = "Invalid Response Error AppKey"
         case .decodingError:
-            self.errorMessage = "decoding Error"
+            errorMessage = "Decoding Error AppKey"
         case .invalidRequest:
-            self.errorMessage = "invalidRequest Error"
+            errorMessage = "InvalidRequest Error AppKey"
         }
+        state = .failure(errorMessage)
     }
 }

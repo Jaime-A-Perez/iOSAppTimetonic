@@ -9,58 +9,57 @@ import Foundation
 import Combine
 
 /// ViewModel for managing OAuth key fetching and creation.
-class OauthKeyViewModel {
+class OauthKeyViewModel: AuthenticationOauthKeyProcessProtocol {
     // MARK: - Properties
-    @Published var isError: Bool = false
-    @Published var existOauthKey: Bool = false
-    @Published var errorMessage: String?
-    @Published var oauthKey = ""
-    
+    @Published private(set) var state = AuthenticationState.idle
     
     private let networkService: NetworkServiceProtocol
     private var cancellables = Set<AnyCancellable>()
-
+    
+    // MARK: - AuthenticationProcess Publisher
+    var statePublisher: Published<AuthenticationState>.Publisher { $state }
+    
     // MARK: - Initialization
     /// Initializes the ViewModel with a network service
     init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
     }
-
+    
     // MARK: - Business Logic
     /// Creates an OAuth key using provided credentials
     func createOauthKey(login: String, pwd: String, appkey: String) {
-        networkService.createOauthKey(login: login, pwd: pwd, appkey: appkey)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    self?.handleError(error)
-                }
-            }, receiveValue: { [weak self] response in
-                self?.oauthKey = response.oauthkey
-                self?.existOauthKey = true
-                self?.isError = false
-            })
-            .store(in: &cancellables)
-    }
+            state = .loading
+            networkService.createOauthKey(login: login, pwd: pwd, appkey: appkey)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { [weak self] completion in
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        self?.handleError(error)
+                    }
+                }, receiveValue: { [weak self] response in
+                    self?.state = .success(response.oauthkey,response.o_u)
+                })
+                .store(in: &cancellables)
+        }
 
     // MARK: - Error Handling
     /// Handles errors from network service.
     private func handleError(_ error: NetworkError) {
-        self.isError = true
-        switch error {
-        case .invalidURL:
-            self.errorMessage = "Invalid URL Error"
-        case .networkError(let networkError):
-            self.errorMessage = networkError.localizedDescription
-        case .invalidResponse:
-            self.errorMessage = "Invalid Response Error"
-        case .decodingError:
-            self.errorMessage = "Decoding Error"
-        case .invalidRequest:
-            self.errorMessage = "Decoding Error"
+            let errorMessage: String
+            switch error {
+            case .invalidURL:
+                errorMessage = "Invalid URL Error OauthKey"
+            case .networkError(let networkError):
+                errorMessage = networkError.localizedDescription
+            case .invalidResponse:
+                errorMessage = "Invalid Response Error OauthKey"
+            case .decodingError:
+                errorMessage = "Decoding Error OauthKey"
+            case .invalidRequest:
+                errorMessage = "Invalid Request Error OauthKey"
+            }
+            state = .failure(errorMessage)
         }
-    }
 }
