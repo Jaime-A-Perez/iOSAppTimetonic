@@ -63,4 +63,16 @@ class SessionKeyViewModel: AuthenticationSessionKeyProcessProtocol {
             }
             state = .failure(errorMessage)
         }
+    
+    // MARK: - Cancel Subscriptions
+        /// Cancels all active subscriptions.
+        func cancelSubscriptions() {
+            cancellables.forEach { $0.cancel() }
+            cancellables.removeAll()
+        }
+        
+        /// Deinitializer to ensure all subscriptions are cancelled.
+        deinit {
+            cancelSubscriptions()
+        }
 }
