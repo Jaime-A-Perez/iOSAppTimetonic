@@ -34,7 +34,7 @@ class NetworkService: NetworkServiceProtocol {
         // Configure the request
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        
+     
         // Perform the network task
         return session.dataTaskPublisher(for: request)
             .mapError { NetworkError.networkError($0) }
@@ -47,7 +47,7 @@ class NetworkService: NetworkServiceProtocol {
                     .setFailureType(to: NetworkError.self)
                     .eraseToAnyPublisher()
             }
-            // Decode the response
+        // Decode the response
             .decode(type: AppKeyResponseModel.self, decoder: JSONDecoder())
             .mapError { _ in NetworkError.decodingError }
             .eraseToAnyPublisher()
@@ -55,26 +55,12 @@ class NetworkService: NetworkServiceProtocol {
     
     // Create an OauthKey
     func createOauthKey(login: String, pwd: String, appkey: String) -> AnyPublisher<OauthKeyResponseModel, NetworkError> {
-        guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.createOauthkey)") else {
+        guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.createOauthkey)&login=\(login)&pwd=\(pwd)&appkey=\(appkey)") else {
             return Fail(error: .invalidURL).eraseToAnyPublisher()
         }
-        // Configure the request
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        // Configure request body
-        let requestBody = [
-            "login": login,
-            "pwd": pwd,
-            "appkey": appkey
-        ]
-
-        guard let requestBodyData = try? JSONSerialization.data(withJSONObject: requestBody) else {
-            return Fail(error: NetworkError.invalidRequest).eraseToAnyPublisher()
-        }
-
-        request.httpBody = requestBodyData
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        // Perform the network task
+        
+        let request = URLRequest(url: url)
+        
         return session.dataTaskPublisher(for: request)
             .mapError { NetworkError.networkError($0) }
             .flatMap { data, response -> AnyPublisher<Data, NetworkError> in
@@ -86,7 +72,7 @@ class NetworkService: NetworkServiceProtocol {
                     .setFailureType(to: NetworkError.self)
                     .eraseToAnyPublisher()
             }
-            // Decode the response
+        // Decode the response
             .decode(type: OauthKeyResponseModel.self, decoder: JSONDecoder())
             .mapError { _ in NetworkError.decodingError }
             .eraseToAnyPublisher()
@@ -94,41 +80,27 @@ class NetworkService: NetworkServiceProtocol {
     
     // Create an Sesskey
     func createSesskey(o_u: String, oauthkey: String, restrictions: String) -> AnyPublisher<SessKeyResponseModel, NetworkError> {
-            guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.createSesskey)") else {
-                return Fail(error: .invalidURL).eraseToAnyPublisher()
-            }
-            // Configure the request
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            // Configure request body
-            let requestBody = [
-                "o_u": o_u,
-                "oauthkey": oauthkey,
-                "restrictions": restrictions
-            ]
-
-            guard let requestBodyData = try? JSONSerialization.data(withJSONObject: requestBody) else {
-                return Fail(error: .invalidRequest).eraseToAnyPublisher()
-            }
-
-            request.httpBody = requestBodyData
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            // Perform the network task
-            return session.dataTaskPublisher(for: request)
-                .mapError { NetworkError.networkError($0) }
-                .flatMap { data, response -> AnyPublisher<Data, NetworkError> in
-                    guard (200...299).contains((response as? HTTPURLResponse)?.statusCode ?? 0) else {
-                        return Fail(error: .invalidResponse).eraseToAnyPublisher()
-                    }
-                    return Just(data)
-                        .setFailureType(to: NetworkError.self)
-                        .eraseToAnyPublisher()
-                }
-                // Decode the response
-                .decode(type: SessKeyResponseModel.self, decoder: JSONDecoder())
-                .mapError { _ in NetworkError.decodingError }
-                .eraseToAnyPublisher()
+        guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.createSesskey)&o_u=\(o_u)&oauthkey=\(oauthkey)&restrictions=") else {
+            return Fail(error: .invalidURL).eraseToAnyPublisher()
         }
+        // Configure the request
+        let request = URLRequest(url: url)
+      
+        return session.dataTaskPublisher(for: request)
+            .mapError { NetworkError.networkError($0) }
+            .flatMap { data, response -> AnyPublisher<Data, NetworkError> in
+                guard (200...299).contains((response as? HTTPURLResponse)?.statusCode ?? 0) else {
+                    return Fail(error: .invalidResponse).eraseToAnyPublisher()
+                }
+                return Just(data)
+                    .setFailureType(to: NetworkError.self)
+                    .eraseToAnyPublisher()
+            }
+        // Decode the response
+            .decode(type: SessKeyResponseModel.self, decoder: JSONDecoder())
+            .mapError { _ in NetworkError.decodingError }
+            .eraseToAnyPublisher()
+    }
     
 }
 
