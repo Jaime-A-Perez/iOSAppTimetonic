@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B915D5A52B6D4E7400FCB654 /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B915D5A42B6D4E7400FCB654 /* MockNetworkService.swift */; };
 		B95870C52B5D7A2D00BCD597 /* PasswordFieldViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95870C42B5D7A2D00BCD597 /* PasswordFieldViewUITests.swift */; };
 		B95870C72B5D7CDB00BCD597 /* LoginButtonViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95870C62B5D7CDB00BCD597 /* LoginButtonViewUITests.swift */; };
 		B95870CC2B5DEA8600BCD597 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95870CB2B5DEA8600BCD597 /* Constants.swift */; };
@@ -91,6 +92,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B915D5A42B6D4E7400FCB654 /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
 		B95870C42B5D7A2D00BCD597 /* PasswordFieldViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFieldViewUITests.swift; sourceTree = "<group>"; };
 		B95870C62B5D7CDB00BCD597 /* LoginButtonViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonViewUITests.swift; sourceTree = "<group>"; };
 		B95870CB2B5DEA8600BCD597 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				B9697D772B67104B004845C6 /* AppKeyViewModelTests.swift */,
 				B9697D792B67191B004845C6 /* OauthKeyViewModelTests.swift */,
 				B9697D7B2B671EC2004845C6 /* SessionKeyViewModelTests.swift */,
+				B915D5A42B6D4E7400FCB654 /* MockNetworkService.swift */,
 			);
 			path = NetworkServicesViewModelsTests;
 			sourceTree = "<group>";
@@ -615,6 +618,7 @@
 				B993FF962B62BD5D006C6BA7 /* AppKeyViewModel.swift in Sources */,
 				B9D8C42D2B5CC50E0089D95A /* LoginViewModelTests.swift in Sources */,
 				B9D8C4292B5CBFC60089D95A /* EmailValidatorTests.swift in Sources */,
+				B915D5A52B6D4E7400FCB654 /* MockNetworkService.swift in Sources */,
 				B9697D852B6742D7004845C6 /* TokenCreator.swift in Sources */,
 				B95870D52B5DF33100BCD597 /* AppKeyResponseModel.swift in Sources */,
 				B9D8C40B2B5C22290089D95A /* LoginModel.swift in Sources */,
