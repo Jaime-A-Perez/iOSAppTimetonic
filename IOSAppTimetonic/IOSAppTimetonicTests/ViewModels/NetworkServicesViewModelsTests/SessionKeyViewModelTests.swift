@@ -9,37 +9,29 @@
 import XCTest
 import Combine
 
-class SessionKeyViewModelTests: XCTestCase {
-    var viewModel: SessionKeyViewModel!
-    var networkService: NetworkService!
-    var urlSession: URLSession!
-    var cancellables = Set<AnyCancellable>()
+@testable import IOSAppTimetonic
+import XCTest
+import Combine
 
+class SessKeyViewModelTests: XCTestCase {
+    var viewModel: SessionKeyViewModel!
+    var networkService: MockNetworkService! // Usa un mock directo del servicio de red
+    var cancellables = Set<AnyCancellable>()
+    
     override func setUp() {
         super.setUp()
-
-        // Set URLSession with MockURLProtocol
-        let config = URLSessionConfiguration.ephemeral
-        config.protocolClasses = [MockURLProtocol.self]
-        urlSession = URLSession(configuration: config)
-        networkService = NetworkService(session: urlSession)
-
+        networkService = MockNetworkService()
         viewModel = SessionKeyViewModel(networkService: networkService)
     }
-
+    
     override func tearDown() {
         viewModel = nil
         networkService = nil
-        urlSession = nil
-        MockURLProtocol.mockData = nil
-        MockURLProtocol.mockResponse = nil
-        MockURLProtocol.mockError = nil
+        cancellables.removeAll()
         super.tearDown()
     }
-
-    func testCreateSessionKeySuccess() {
-        // Setting response and fake data
-        MockURLProtocol.mockResponse = HTTPURLResponse(url: URL(string: "https://example.com/createAppKey")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+    
+    func testFetchSessKeySuccess() {
         let mockJSON = """
         {
             "status": "ok",
@@ -59,22 +51,24 @@ class SessionKeyViewModelTests: XCTestCase {
             "req": "createSesskey"
         }
         """
+        networkService.mockSessKeyJSON = mockJSON
         
-        MockURLProtocol.mockData = mockJSON.data(using: .utf8)!
-
-        let expectation = XCTestExpectation(description: "Create OAuth Key Success")
+        let expectation = XCTestExpectation(description: "Fetch sesskey success")
         
-        viewModel.createSessionKey(o_u: "demo", oauthkey: "8QyG-XYJ5-sbmW-sDE1-Zpku-K1gP-Hz4t", restrictions: "")
-        viewModel.$sesskey
-            .dropFirst()
-            .sink { sesskey in
-                XCTAssertEqual(sesskey, "AwYJ-8Qvj-TMVk-8snb-H93K-iAPQ-SELY")
-                expectation.fulfill()
+        viewModel.$state
+            .dropFirst() // Ignora el estado inicial
+            .sink { state in
+                if case .success(let sessKey, _) = state {
+                    XCTAssertEqual(sessKey, "AwYJ-8Qvj-TMVk-8snb-H93K-iAPQ-SELY", "El SessKey recibido debe coincidir con el valor esperado")
+                    expectation.fulfill()
+                }
             }
             .store(in: &cancellables)
-
-        wait(for: [expectation], timeout: 2)
+        
+        viewModel.createSessionKey(o_u: "demo", oauthkey: "hZj4-rWlV-5Xv7-Airx-KXaC-D8Yp-CF7U", restrictions: "")
+        
+        wait(for: [expectation], timeout: 1)
     }
-
-
 }
+
+                                   

@@ -11,61 +11,51 @@ import Combine
 
 class OauthKeyViewModelTests: XCTestCase {
     var viewModel: OauthKeyViewModel!
-    var networkService: NetworkService!
-    var urlSession: URLSession!
+    var networkService : MockNetworkService!
     var cancellables = Set<AnyCancellable>()
-
+    
     override func setUp() {
         super.setUp()
-
-        // Set URLSession with MockURLProtocol
-        let config = URLSessionConfiguration.ephemeral
-        config.protocolClasses = [MockURLProtocol.self]
-        urlSession = URLSession(configuration: config)
-        networkService = NetworkService(session: urlSession)
-
+        networkService = MockNetworkService()
         viewModel = OauthKeyViewModel(networkService: networkService)
     }
-
+    
     override func tearDown() {
         viewModel = nil
         networkService = nil
-        urlSession = nil
-        MockURLProtocol.mockData = nil
-        MockURLProtocol.mockResponse = nil
-        MockURLProtocol.mockError = nil
+        cancellables.removeAll()
         super.tearDown()
     }
-
+    
     func testCreateOauthKeySuccess() {
-        // Setting response and fake data
-        MockURLProtocol.mockResponse = HTTPURLResponse(url: URL(string: "https://example.com/createAppKey")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
-        let mockJSON = """
+        let mockJson = """
         {
-            "status": "ok",
-            "oauthkey": "8QyG-XYJ5-sbmW-sDE1-Zpku-K1gP-Hz4t",
-            "id": "900133",
-            "o_u": "demo",
-            "createdVNB": "live-6.49q/6.49",
-            "req": "createOauthkey"
+             "status": "ok",
+             "oauthkey": "8QyG-XYJ5-sbmW-sDE1-Zpku-K1gP-Hz4t",
+             "id": "900133",
+             "o_u": "demo",
+             "createdVNB": "live-6.49q/6.49",
+             "req": "createOauthkey"
         }
         """
         
-        MockURLProtocol.mockData = mockJSON.data(using: .utf8)!
-
-        let expectation = XCTestExpectation(description: "Create OAuth Key Success")
+        networkService.mockOauthKeyJSON = mockJson
         
-        viewModel.createOauthKey(login: "user@example.com", pwd: "password", appkey: "appkey123")
-        viewModel.$oauthKey
+        let expectation = XCTestExpectation(description: "Create oauthKey successs")
+        
+        viewModel.$state
             .dropFirst()
-            .sink { oauthKey in
-                XCTAssertEqual(oauthKey, "8QyG-XYJ5-sbmW-sDE1-Zpku-K1gP-Hz4t")
-                expectation.fulfill()
+            .sink { state in
+                if case .success(let oauthKey, let o_u) = state {
+                    XCTAssertEqual(oauthKey, "8QyG-XYJ5-sbmW-sDE1-Zpku-K1gP-Hz4t")
+                    XCTAssertEqual(o_u, "demo")
+                    expectation.fulfill()
+                }
             }
             .store(in: &cancellables)
-
-        wait(for: [expectation], timeout: 2)
+        
+        viewModel.createOauthKey(login: "example@exam.com", pwd: "pxd134", appkey: "hZj4-rWlV-5Xv7-Airx-KXaC-D8Yp-CF7U")
+        
+        wait(for: [expectation], timeout: 1)
     }
-
-
 }

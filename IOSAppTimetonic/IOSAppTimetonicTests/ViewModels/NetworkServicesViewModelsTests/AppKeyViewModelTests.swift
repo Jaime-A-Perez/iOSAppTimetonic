@@ -11,35 +11,23 @@ import Combine
 
 class AppKeyViewModelTests: XCTestCase {
     var viewModel: AppKeyViewModel!
-    var networkService: NetworkService!
-    var urlSession: URLSession!
+    var networkService: MockNetworkService! 
     var cancellables = Set<AnyCancellable>()
-
+    
     override func setUp() {
         super.setUp()
-
-        // Set of URLSession with MockURLProtocol
-        let config = URLSessionConfiguration.ephemeral
-        config.protocolClasses = [MockURLProtocol.self]
-        urlSession = URLSession(configuration: config)
-        networkService = NetworkService(session: urlSession)
-
+        networkService = MockNetworkService()
         viewModel = AppKeyViewModel(networkService: networkService)
     }
-
+    
     override func tearDown() {
         viewModel = nil
         networkService = nil
-        urlSession = nil
-        MockURLProtocol.mockData = nil
-        MockURLProtocol.mockResponse = nil
-        MockURLProtocol.mockError = nil
+        cancellables.removeAll()
         super.tearDown()
     }
-
+    
     func testFetchAppKeySuccess() {
-        // Setting response and fake data
-        MockURLProtocol.mockResponse = HTTPURLResponse(url: URL(string: "https://example.com/createAppKey")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
         let mockJSON = """
         {
             "status": "ok",
@@ -49,23 +37,24 @@ class AppKeyViewModelTests: XCTestCase {
             "req": "createAppkey"
         }
         """
+        networkService.mockAppKeyJSON = mockJSON
         
-        MockURLProtocol.mockData = mockJSON.data(using: .utf8)!
-
         let expectation = XCTestExpectation(description: "Fetch app key success")
-
-        // Observe changes in the 'appKey' property
-        viewModel.fetchAppKey()
-        viewModel.$appKey
+        
+        viewModel.$state
             .dropFirst()
-            .sink { appKey in
-                XCTAssertEqual(appKey, "hZj4-rWlV-5Xv7-Airx-KXaC-D8Yp-CF7U")
-                expectation.fulfill()
+            .sink { state in
+                if case .success(let appKey, _) = state {
+                    XCTAssertEqual(appKey, "hZj4-rWlV-5Xv7-Airx-KXaC-D8Yp-CF7U", "El appKey recibido debe coincidir con el valor esperado")
+                    expectation.fulfill()
+                }
             }
             .store(in: &cancellables)
-
-
-        wait(for: [expectation], timeout: 2)
+        
+        viewModel.fetchAppKey()
+        
+        wait(for: [expectation], timeout: 1)
     }
-
 }
+
+
