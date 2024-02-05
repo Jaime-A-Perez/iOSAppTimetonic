@@ -54,7 +54,7 @@ class NetworkServiceTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectations(timeout: 2)
+        waitForExpectations(timeout: 1)
         cancelable.cancel()
     }
 
@@ -74,7 +74,7 @@ class NetworkServiceTests: XCTestCase {
                 }
             },   receiveValue: {_ in })
         
-        wait(for: [expectation], timeout: 2)
+        wait(for: [expectation], timeout: 1)
         cancelable.cancel()
     }
     
@@ -102,7 +102,7 @@ class NetworkServiceTests: XCTestCase {
                 expectation.fulfill()
             }
         
-        wait(for: [expectation], timeout: 2)
+        wait(for: [expectation], timeout: 1)
         cancelable.cancel()
     }
 
@@ -122,7 +122,7 @@ class NetworkServiceTests: XCTestCase {
                 }
             }, receiveValue: { _ in })
         
-        wait(for: [expectation], timeout: 2)
+        wait(for: [expectation], timeout: 1)
         cancelable.cancel()
     }
     
@@ -160,7 +160,7 @@ class NetworkServiceTests: XCTestCase {
             expectation.fulfill()
         })
 
-        waitForExpectations(timeout: 2)
+        waitForExpectations(timeout: 1)
         cancellable.cancel()
     }
 
@@ -180,7 +180,7 @@ class NetworkServiceTests: XCTestCase {
             }
         }, receiveValue: { _ in })
         
-        waitForExpectations(timeout: 2)
+        waitForExpectations(timeout: 1)
         cancellable.cancel()
     }
 

@@ -56,7 +56,6 @@
 		B9D8C3E52B5C20E70089D95A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9D8C3E42B5C20E70089D95A /* Preview Assets.xcassets */; };
 		B9D8C3EF2B5C20E70089D95A /* IOSAppTimetonicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C3EE2B5C20E70089D95A /* IOSAppTimetonicTests.swift */; };
 		B9D8C3F92B5C20E70089D95A /* IOSAppTimetonicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C3F82B5C20E70089D95A /* IOSAppTimetonicUITests.swift */; };
-		B9D8C3FB2B5C20E70089D95A /* IOSAppTimetonicUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C3FA2B5C20E70089D95A /* IOSAppTimetonicUITestsLaunchTests.swift */; };
 		B9D8C40A2B5C22290089D95A /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C4092B5C22290089D95A /* LoginModel.swift */; };
 		B9D8C40B2B5C22290089D95A /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C4092B5C22290089D95A /* LoginModel.swift */; };
 		B9D8C40E2B5C22630089D95A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D8C40D2B5C22630089D95A /* LoginViewModel.swift */; };
@@ -127,7 +126,6 @@
 		B9D8C3EE2B5C20E70089D95A /* IOSAppTimetonicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSAppTimetonicTests.swift; sourceTree = "<group>"; };
 		B9D8C3F42B5C20E70089D95A /* IOSAppTimetonicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IOSAppTimetonicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9D8C3F82B5C20E70089D95A /* IOSAppTimetonicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSAppTimetonicUITests.swift; sourceTree = "<group>"; };
-		B9D8C3FA2B5C20E70089D95A /* IOSAppTimetonicUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSAppTimetonicUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B9D8C4092B5C22290089D95A /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		B9D8C40D2B5C22630089D95A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		B9D8C4132B5C6A100089D95A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -345,7 +343,6 @@
 			children = (
 				B98CC56E2B5D63A600E15FAD /* LoginViews */,
 				B9D8C3F82B5C20E70089D95A /* IOSAppTimetonicUITests.swift */,
-				B9D8C3FA2B5C20E70089D95A /* IOSAppTimetonicUITestsLaunchTests.swift */,
 			);
 			path = IOSAppTimetonicUITests;
 			sourceTree = "<group>";
@@ -641,7 +638,6 @@
 				B95870C52B5D7A2D00BCD597 /* PasswordFieldViewUITests.swift in Sources */,
 				B98CC5732B5D6CD200E15FAD /* EmailFieldViewUITests.swift in Sources */,
 				B9D8C3F92B5C20E70089D95A /* IOSAppTimetonicUITests.swift in Sources */,
-				B9D8C3FB2B5C20E70089D95A /* IOSAppTimetonicUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
