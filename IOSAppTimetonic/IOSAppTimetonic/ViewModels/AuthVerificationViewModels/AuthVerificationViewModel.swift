@@ -117,7 +117,9 @@ class AuthVerificationViewModel : ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
                 switch state {
-                case .success:
+                case .success(let sessKey, _):
+                    // Storing sessKey in keychaing
+                    self?.storeSessKey(sessKey)
                     self?.isAuthenticating = false
                     self?.isAuthenticationComplete = true
                     self?.authenticationStatusMessage = AuthenticationTitles.Successful.stringValue
@@ -131,9 +133,21 @@ class AuthVerificationViewModel : ObservableObject {
             }
             .store(in: &cancellables)
     }
+    
+    func storeSessKey(_ sessKey: String) {
+        do {
+            let tokenCreator = TokenCreator(keychainService: KeychainService())
+            try tokenCreator.saveToken(sessKey, service: Constants.API.baseUrl, account: userEmail)
+        }catch {
+            self.latestErrorMessage = "Failed to store token: \(error)"
+        }
+    }
 }
 
 
 public enum AuthenticationTitles: CodingKey {
     case AppKey, OAuthKey, SessionKey, Successful
 }
+
+
+
