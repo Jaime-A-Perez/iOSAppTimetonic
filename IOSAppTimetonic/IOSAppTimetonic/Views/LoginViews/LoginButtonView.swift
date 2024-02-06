@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct LoginButtonView: View {
-    @StateObject var loginViewModel : LoginViewModel
+    @StateObject var loginViewModel = LoginViewModel.shared
+    @State var changeView = false
+    
+    let authVerificationViewModel = AuthVerificationViewModel.shared
     
     var body: some View {
         HStack {
             Spacer()
             // Login button
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+            Button(action: {
+                changeView = true
+                authVerificationViewModel.startAuthFetch()
+            }, label: {
                 Text("Log In")
                     .fontWeight(.heavy)
                     .accessibilityIdentifier("loginButton")
@@ -26,8 +32,12 @@ struct LoginButtonView: View {
             })
             .padding(.vertical, 13)
             .disabled(!(loginViewModel.isValidEmail && loginViewModel.isValidPassword))
+            .background(
+                NavigationLink("", destination: AuthVerificationView(), isActive: $changeView)
+            )
         }
     }
 }
+
 
 

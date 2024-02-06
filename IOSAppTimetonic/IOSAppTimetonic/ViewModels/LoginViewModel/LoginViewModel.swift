@@ -12,6 +12,9 @@ class LoginViewModel: ObservableObject {
     @Published var user = LoginModel(email: "", password: "")
     private var emailValidator: EmailValidating
     private var passwordValidator: PasswordValidating
+    
+    // Singleton instance
+    static let shared = LoginViewModel()
 
     init(emailValidator: EmailValidating = EmailValidator(), passwordValidator: PasswordValidating = PasswordValidator()) {
         self.emailValidator = emailValidator
