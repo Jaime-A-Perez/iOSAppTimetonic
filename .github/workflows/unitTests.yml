@@ -1,0 +1,24 @@
+name: Unit Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  run-ios-tests:
+    runs-on: macos-13
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: '15.0.1'      
+        
+    - name: Run Unit Tests
+      run: |
+        cd ./IOSAppTimetonic   
+        xcodebuild test -scheme IOSAppTimetonic -sdk iphonesimulator -destination 'platform=iOS Simulator,id=AD62461A-EF69-44A3-A518-A11E088DBC4E' -only-testing:IOSAppTimetonicTests 
