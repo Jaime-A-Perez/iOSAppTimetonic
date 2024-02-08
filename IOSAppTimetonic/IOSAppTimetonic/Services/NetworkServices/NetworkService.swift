@@ -15,16 +15,18 @@ protocol NetworkServiceProtocol {
 
 
 // Network service for handling API requests with implementation protocol
-class NetworkService: NetworkServiceProtocol {
+class NetworkService: ObservableObject, NetworkServiceProtocol {
     // URLSession dependency for network tasks
     private let session: URLSession
     
     // Dependency injection of URLSession for better testability
     init(session: URLSession = .shared) {
         self.session = session
+//        getAllBooks()
     }
+   
     
-    // Create an AppKey
+    /// Create an AppKey
     func createAppKey() -> AnyPublisher<AppKeyResponseModel, NetworkError> {
         
         guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.createAppKey)&appname=api") else {
@@ -53,7 +55,7 @@ class NetworkService: NetworkServiceProtocol {
             .eraseToAnyPublisher()
     }
     
-    // Create an OauthKey
+    /// Create an OauthKey
     func createOauthKey(login: String, pwd: String, appkey: String) -> AnyPublisher<OauthKeyResponseModel, NetworkError> {
         guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.createOauthkey)&login=\(login)&pwd=\(pwd)&appkey=\(appkey)") else {
             return Fail(error: .invalidURL).eraseToAnyPublisher()
@@ -78,7 +80,7 @@ class NetworkService: NetworkServiceProtocol {
             .eraseToAnyPublisher()
     }
     
-    // Create an Sesskey
+    /// Create an Sesskey
     func createSesskey(o_u: String, oauthkey: String, restrictions: String) -> AnyPublisher<SessKeyResponseModel, NetworkError> {
         guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.createSesskey)&o_u=\(o_u)&oauthkey=\(oauthkey)&restrictions=") else {
             return Fail(error: .invalidURL).eraseToAnyPublisher()
@@ -102,8 +104,48 @@ class NetworkService: NetworkServiceProtocol {
             .eraseToAnyPublisher()
     }
     
+    
+    /// Fetches all books from the API, utilizing stored session and user tokens
+    func getAllBooks() -> AnyPublisher<APIResponse, NetworkError> {
+        let tokenReader = TokenReader(keychainService: KeychainService())
+        do {
+            let s = try tokenReader.retrieveToken(service: Constants.API.baseUrl, account: "Sessk")!
+            let o = try tokenReader.retrieveToken(service: Constants.API.baseUrl, account: "o_u")!
+
+            guard let url = URL(string: "\(Constants.API.baseUrl)\(Constants.API.version)\(Constants.API.getAllBooks)&u_c=\(o)&o_u=\(o)&sesskey=\(s)") else {
+                return Fail(error: .invalidResponse).eraseToAnyPublisher()
+            }
+            
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+
+            return URLSession.shared.dataTaskPublisher(for: request)
+                .mapError { NetworkError.networkError($0) }
+                .flatMap { data, response -> AnyPublisher<Data, NetworkError> in
+                    guard let httpResponse = response as? HTTPURLResponse,
+                          (200...299).contains(httpResponse.statusCode) else {
+                        return Fail(error: .invalidResponse).eraseToAnyPublisher()
+                    }
+                    return Just(data)
+                        .setFailureType(to: NetworkError.self)
+                        .eraseToAnyPublisher()
+                }
+                .decode(type: APIResponse.self, decoder: JSONDecoder())
+                .mapError { error in
+                    if let decodingError = error as? DecodingError {
+                        print("Decoding error: \(decodingError)")
+                    }
+                    return error is DecodingError ? NetworkError.decodingError : NetworkError.networkError(error)
+                }
+                .eraseToAnyPublisher()
+        } catch {
+            return Fail(error: .networkError(error)).eraseToAnyPublisher()
+        }
+    }
 }
 
+/// Defines possible errors that can occur within the network service layer.
 enum NetworkError: Error {
     case invalidURL
     case networkError(Error)
