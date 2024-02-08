@@ -20,14 +20,12 @@ class AuthVerificationViewModel : ObservableObject {
     @Published private(set) var authenticationIndicator: Int = 0
     @Published var authenticationState : AuthenticationState = .checkingIfAlreadyAuthenticated
     
-    @Published var books: [Book] = []
-    
+       
     // ViewModel dependencies for different authentication keys
     private var appKeyViewModel: AuthenticationAppKeyProcessProtocol
     private var oauthKeyViewModel: AuthenticationOauthKeyProcessProtocol
     private var sessionKeyViewModel: AuthenticationSessionKeyProcessProtocol
     private var loginViewModel: LoginViewModel
-    @Published var listBook: NetworkService
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -39,8 +37,7 @@ class AuthVerificationViewModel : ObservableObject {
         appKeyViewModel: AppKeyViewModel(networkService: NetworkService()),
         oauthKeyViewModel: OauthKeyViewModel(networkService: NetworkService()),
         sessionKeyViewModel: SessionKeyViewModel(networkService: NetworkService()),
-        loginViewModel: LoginViewModel.shared,
-        listBook: NetworkService()
+        loginViewModel: LoginViewModel.shared
     )
     
     // MARK: - Initialization
@@ -48,13 +45,11 @@ class AuthVerificationViewModel : ObservableObject {
         appKeyViewModel: AuthenticationAppKeyProcessProtocol,
         oauthKeyViewModel: AuthenticationOauthKeyProcessProtocol,
         sessionKeyViewModel: AuthenticationSessionKeyProcessProtocol,
-        loginViewModel: LoginViewModel,
-        listBook: NetworkService) {
+        loginViewModel: LoginViewModel) {
             self.appKeyViewModel = appKeyViewModel
             self.oauthKeyViewModel = oauthKeyViewModel
             self.sessionKeyViewModel = sessionKeyViewModel
             self.loginViewModel = loginViewModel
-            self.listBook = listBook
             
             checkIfAlreadyAuthenticated()
             observeLoginViewModel()
