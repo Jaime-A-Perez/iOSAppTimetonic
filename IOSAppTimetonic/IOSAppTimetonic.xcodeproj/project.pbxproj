@@ -33,6 +33,12 @@
 		B9697D852B6742D7004845C6 /* TokenCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9697D832B6742D7004845C6 /* TokenCreator.swift */; };
 		B9697D872B674988004845C6 /* TokenReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9697D862B674988004845C6 /* TokenReader.swift */; };
 		B9697D882B674988004845C6 /* TokenReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9697D862B674988004845C6 /* TokenReader.swift */; };
+		B96D89CB2B73E2D900CCFF6E /* AllBooksResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96D89CA2B73E2D900CCFF6E /* AllBooksResponseModel.swift */; };
+		B96D89CC2B73E2D900CCFF6E /* AllBooksResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96D89CA2B73E2D900CCFF6E /* AllBooksResponseModel.swift */; };
+		B96D89CD2B73E2D900CCFF6E /* AllBooksResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96D89CA2B73E2D900CCFF6E /* AllBooksResponseModel.swift */; };
+		B96D89CF2B74222800CCFF6E /* LandingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96D89CE2B74222800CCFF6E /* LandingPageView.swift */; };
+		B96D89D02B74222800CCFF6E /* LandingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96D89CE2B74222800CCFF6E /* LandingPageView.swift */; };
+		B96D89D12B74222800CCFF6E /* LandingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96D89CE2B74222800CCFF6E /* LandingPageView.swift */; };
 		B972437E2B69516F0033A4A6 /* AuthVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B972437D2B69516F0033A4A6 /* AuthVerificationViewModel.swift */; };
 		B972437F2B69516F0033A4A6 /* AuthVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B972437D2B69516F0033A4A6 /* AuthVerificationViewModel.swift */; };
 		B97EF74C2B67D7A70070A91F /* TokenUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97EF74B2B67D7A70070A91F /* TokenUpdater.swift */; };
@@ -107,6 +113,8 @@
 		B9697D7F2B673448004845C6 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		B9697D832B6742D7004845C6 /* TokenCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenCreator.swift; sourceTree = "<group>"; };
 		B9697D862B674988004845C6 /* TokenReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenReader.swift; sourceTree = "<group>"; };
+		B96D89CA2B73E2D900CCFF6E /* AllBooksResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AllBooksResponseModel.swift; path = IOSAppTimetonic/Models/AllBooksResponseModel.swift; sourceTree = SOURCE_ROOT; };
+		B96D89CE2B74222800CCFF6E /* LandingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageView.swift; sourceTree = "<group>"; };
 		B972437D2B69516F0033A4A6 /* AuthVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVerificationViewModel.swift; sourceTree = "<group>"; };
 		B97EF74B2B67D7A70070A91F /* TokenUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenUpdater.swift; sourceTree = "<group>"; };
 		B97EF74E2B67DB5F0070A91F /* TokenDeleter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDeleter.swift; sourceTree = "<group>"; };
@@ -164,6 +172,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B92A87B52B719ACC00CCA4DD /* LandingPages */ = {
+			isa = PBXGroup;
+			children = (
+				B96D89CE2B74222800CCFF6E /* LandingPageView.swift */,
+			);
+			path = LandingPages;
+			sourceTree = "<group>";
+		};
 		B95870C92B5DE22A00BCD597 /* LoginModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +212,7 @@
 				B95870D32B5DF33100BCD597 /* AppKeyResponseModel.swift */,
 				B96973532B61EE8800DC68D1 /* OauthKeyResponseModel.swift */,
 				B96973562B61FB7300DC68D1 /* SessKeyResponseModel.swift */,
+				B96D89CA2B73E2D900CCFF6E /* AllBooksResponseModel.swift */,
 			);
 			path = ResponseModels;
 			sourceTree = "<group>";
@@ -351,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				B9D8C3DF2B5C20E60089D95A /* ContentView.swift */,
+				B92A87B52B719ACC00CCA4DD /* LandingPages */,
 				B97EF7512B67F06B0070A91F /* AuthVerificationViews */,
 				B9D8C4162B5C71720089D95A /* LoginViews */,
 			);
@@ -569,6 +587,7 @@
 				B9697D872B674988004845C6 /* TokenReader.swift in Sources */,
 				B95870CC2B5DEA8600BCD597 /* Constants.swift in Sources */,
 				B9D8C4182B5C71E90089D95A /* EmailFieldView.swift in Sources */,
+				B96D89CF2B74222800CCFF6E /* LandingPageView.swift in Sources */,
 				B97EF7532B67F0A00070A91F /* AuthVerificationView.swift in Sources */,
 				B9D8C4202B5CA75C0089D95A /* EmailValidator.swift in Sources */,
 				B9697D842B6742D7004845C6 /* TokenCreator.swift in Sources */,
@@ -578,6 +597,7 @@
 				B993FF952B62BD5D006C6BA7 /* AppKeyViewModel.swift in Sources */,
 				B9D8C3E02B5C20E60089D95A /* ContentView.swift in Sources */,
 				B9D8C40A2B5C22290089D95A /* LoginModel.swift in Sources */,
+				B96D89CB2B73E2D900CCFF6E /* AllBooksResponseModel.swift in Sources */,
 				B9D8C4232B5CA76D0089D95A /* PasswordValidator.swift in Sources */,
 				B97EF74C2B67D7A70070A91F /* TokenUpdater.swift in Sources */,
 				B9D8C4142B5C6A100089D95A /* LoginView.swift in Sources */,
@@ -606,8 +626,10 @@
 				B9D8C4212B5CA75C0089D95A /* EmailValidator.swift in Sources */,
 				B97EF7502B67DB5F0070A91F /* TokenDeleter.swift in Sources */,
 				B9697D7A2B67191B004845C6 /* OauthKeyViewModelTests.swift in Sources */,
+				B96D89D02B74222800CCFF6E /* LandingPageView.swift in Sources */,
 				B9D728542B608729008F0EB4 /* MockURLProtocol.swift in Sources */,
 				B9697D812B673448004845C6 /* KeychainService.swift in Sources */,
+				B96D89CC2B73E2D900CCFF6E /* AllBooksResponseModel.swift in Sources */,
 				B9697D7C2B671EC2004845C6 /* SessionKeyViewModelTests.swift in Sources */,
 				B972437F2B69516F0033A4A6 /* AuthVerificationViewModel.swift in Sources */,
 				B9D8C42B2B5CC48A0089D95A /* PasswordValidatorTests.swift in Sources */,
@@ -635,7 +657,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B95870C72B5D7CDB00BCD597 /* LoginButtonViewUITests.swift in Sources */,
+				B96D89CD2B73E2D900CCFF6E /* AllBooksResponseModel.swift in Sources */,
 				B95870C52B5D7A2D00BCD597 /* PasswordFieldViewUITests.swift in Sources */,
+				B96D89D12B74222800CCFF6E /* LandingPageView.swift in Sources */,
 				B98CC5732B5D6CD200E15FAD /* EmailFieldViewUITests.swift in Sources */,
 				B9D8C3F92B5C20E70089D95A /* IOSAppTimetonicUITests.swift in Sources */,
 			);
