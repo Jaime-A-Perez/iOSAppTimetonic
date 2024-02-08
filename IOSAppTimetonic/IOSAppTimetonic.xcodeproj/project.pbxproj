@@ -38,12 +38,10 @@
 		B96D89CD2B73E2D900CCFF6E /* AllBooksResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96D89CA2B73E2D900CCFF6E /* AllBooksResponseModel.swift */; };
 		B96D89CF2B74222800CCFF6E /* LandingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96D89CE2B74222800CCFF6E /* LandingPageView.swift */; };
 		B96D89D02B74222800CCFF6E /* LandingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96D89CE2B74222800CCFF6E /* LandingPageView.swift */; };
-		B96D89D12B74222800CCFF6E /* LandingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96D89CE2B74222800CCFF6E /* LandingPageView.swift */; };
 		B972437E2B69516F0033A4A6 /* AuthVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B972437D2B69516F0033A4A6 /* AuthVerificationViewModel.swift */; };
 		B972437F2B69516F0033A4A6 /* AuthVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B972437D2B69516F0033A4A6 /* AuthVerificationViewModel.swift */; };
 		B97BE78A2B7546C200249B3E /* LandingPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97BE7892B7546C200249B3E /* LandingPageViewModel.swift */; };
 		B97BE78B2B7546C200249B3E /* LandingPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97BE7892B7546C200249B3E /* LandingPageViewModel.swift */; };
-		B97BE78C2B7546C200249B3E /* LandingPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97BE7892B7546C200249B3E /* LandingPageViewModel.swift */; };
 		B97EF74C2B67D7A70070A91F /* TokenUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97EF74B2B67D7A70070A91F /* TokenUpdater.swift */; };
 		B97EF74D2B67D7A70070A91F /* TokenUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97EF74B2B67D7A70070A91F /* TokenUpdater.swift */; };
 		B97EF74F2B67DB5F0070A91F /* TokenDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97EF74E2B67DB5F0070A91F /* TokenDeleter.swift */; };
@@ -663,11 +661,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B97BE78C2B7546C200249B3E /* LandingPageViewModel.swift in Sources */,
 				B95870C72B5D7CDB00BCD597 /* LoginButtonViewUITests.swift in Sources */,
 				B96D89CD2B73E2D900CCFF6E /* AllBooksResponseModel.swift in Sources */,
 				B95870C52B5D7A2D00BCD597 /* PasswordFieldViewUITests.swift in Sources */,
-				B96D89D12B74222800CCFF6E /* LandingPageView.swift in Sources */,
 				B98CC5732B5D6CD200E15FAD /* EmailFieldViewUITests.swift in Sources */,
 				B9D8C3F92B5C20E70089D95A /* IOSAppTimetonicUITests.swift in Sources */,
 			);
