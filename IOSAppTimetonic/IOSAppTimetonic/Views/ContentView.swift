@@ -8,14 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var authVerificationViewModel : AuthVerificationViewModel
+    
     var body: some View {
-        NavigationView{
-            LoginView()
-            AuthVerificationView()
+        switch authVerificationViewModel.authenticationState {
+        case .checkingIfAlreadyAuthenticated:
+            ProgressView("Checking authentication...")
+                .scaleEffect(x:1.6, y:1.6, anchor: .center)
+                .tint(.blue)
+            if authVerificationViewModel.latestErrorMessage != "" {
+                Text(authVerificationViewModel.latestErrorMessage)
+            }
+        case .idle:
+            NavigationView{ LoginView() }
+        case .authenticated:
+            LandingPageView()
+        default:
+            NavigationView{ LoginView() }
         }
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .environmentObject(AuthVerificationViewModel.shared)
+    }
 }
