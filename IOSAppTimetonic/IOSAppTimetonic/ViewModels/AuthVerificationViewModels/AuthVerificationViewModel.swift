@@ -18,12 +18,16 @@ class AuthVerificationViewModel : ObservableObject {
     @Published var isAuthenticationComplete = false
     @Published var authenticationStatusMessage = ""
     @Published private(set) var authenticationIndicator: Int = 0
+    @Published var authenticationState : AuthenticationState = .checkingIfAlreadyAuthenticated
+    
+    @Published var books: [Book] = []
     
     // ViewModel dependencies for different authentication keys
     private var appKeyViewModel: AuthenticationAppKeyProcessProtocol
     private var oauthKeyViewModel: AuthenticationOauthKeyProcessProtocol
     private var sessionKeyViewModel: AuthenticationSessionKeyProcessProtocol
     private var loginViewModel: LoginViewModel
+    @Published var listBook: NetworkService
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -35,7 +39,8 @@ class AuthVerificationViewModel : ObservableObject {
         appKeyViewModel: AppKeyViewModel(networkService: NetworkService()),
         oauthKeyViewModel: OauthKeyViewModel(networkService: NetworkService()),
         sessionKeyViewModel: SessionKeyViewModel(networkService: NetworkService()),
-        loginViewModel: LoginViewModel.shared
+        loginViewModel: LoginViewModel.shared,
+        listBook: NetworkService()
     )
     
     // MARK: - Initialization
@@ -43,17 +48,22 @@ class AuthVerificationViewModel : ObservableObject {
         appKeyViewModel: AuthenticationAppKeyProcessProtocol,
         oauthKeyViewModel: AuthenticationOauthKeyProcessProtocol,
         sessionKeyViewModel: AuthenticationSessionKeyProcessProtocol,
-        loginViewModel: LoginViewModel) {
+        loginViewModel: LoginViewModel,
+        listBook: NetworkService) {
             self.appKeyViewModel = appKeyViewModel
             self.oauthKeyViewModel = oauthKeyViewModel
             self.sessionKeyViewModel = sessionKeyViewModel
             self.loginViewModel = loginViewModel
+            self.listBook = listBook
             
+            checkIfAlreadyAuthenticated()
             observeLoginViewModel()
             observeAuthenticationProcesses()
         }
     
-    // Function to start the authentication process
+    // MARK: - Authentication
+    
+    /// Function to start the authentication process
     func startAuthFetch() {
         appKeyViewModel.fetchAppKey()
     }
@@ -64,6 +74,7 @@ class AuthVerificationViewModel : ObservableObject {
             .sink { [weak self] user in
                 self?.userEmail = user.email
                 self?.userPwd = user.password
+                Constants.API.userEmail = user.email
             }
             .store(in: &cancellables)
     }
@@ -100,6 +111,7 @@ class AuthVerificationViewModel : ObservableObject {
             .sink { [weak self] state in
                 switch state {
                 case .success(let oauthKey, let o_u):
+                    self?.storeKey(o_u, forAccount: "o_u")
                     self?.authenticationStatusMessage = AuthenticationTitles.SessionKey.stringValue
                     self?.sessionKeyViewModel.createSessionKey(o_u: o_u, oauthkey: oauthKey, restrictions: "")
                     self?.authenticationIndicator = 2
@@ -119,7 +131,7 @@ class AuthVerificationViewModel : ObservableObject {
                 switch state {
                 case .success(let sessKey, _):
                     // Storing sessKey in keychaing
-                    self?.storeSessKey(sessKey)
+                    self?.storeKey(sessKey, forAccount: "Sessk")
                     self?.isAuthenticating = false
                     self?.isAuthenticationComplete = true
                     self?.authenticationStatusMessage = AuthenticationTitles.Successful.stringValue
@@ -134,14 +146,59 @@ class AuthVerificationViewModel : ObservableObject {
             .store(in: &cancellables)
     }
     
-    func storeSessKey(_ sessKey: String) {
+    
+    // MARK: - Token Management
+    
+    /// Stores a key in the keychain for a given account type
+    func storeKey(_ key: String, forAccount accountType: String) {
         do {
             let tokenCreator = TokenCreator(keychainService: KeychainService())
-            try tokenCreator.saveToken(sessKey, service: Constants.API.baseUrl, account: userEmail)
-        }catch {
+            try tokenCreator.saveToken(key, service: Constants.API.baseUrl, account: accountType)
+        } catch {
             self.latestErrorMessage = "Failed to store token: \(error)"
         }
     }
+    
+    /// Deletes the session key from the keychain
+    func sessKeyDelete() -> Bool {
+        do {
+            let deleter = TokenDeleter(keychainService: KeychainService())
+            let _ = try deleter.deleteToken(service: Constants.API.baseUrl, account: "Sessk")
+            let _ = try deleter.deleteToken(service: Constants.API.baseUrl, account: "o_u")
+            return true
+        }catch {
+            self.latestErrorMessage = "Could not delete stored key: \(error)"
+            return false
+        }
+    }
+    
+    
+    // MARK: - Authentication Status
+    
+    /// Verifies whether the necessary keys are stored in the keychain
+    func verifyKeyStored() -> Bool {
+        do {
+            let tokenReader = TokenReader(keychainService: KeychainService())
+            let k1 = try tokenReader.retrieveToken(service: Constants.API.baseUrl, account: "Sessk")
+            let k2 = try tokenReader.retrieveToken(service: Constants.API.baseUrl, account: "o_u")
+            if (k1 != "") && (k2 != "") {return true} else { return false}
+        } catch {
+            self.latestErrorMessage = "Could not verify stored key: \(error)"
+            return false
+        }
+    }
+    
+    /// Checks if the user is already authenticated by verifying stored keys
+    func checkIfAlreadyAuthenticated() {
+        Just(verifyKeyStored())
+            .delay(for: 0.5, scheduler: RunLoop.main)
+            .sink(receiveValue: { [weak self] isAuthenticated in
+                self?.authenticationState = isAuthenticated ? .authenticated : .idle
+            })
+            .store(in: &cancellables)
+    }
+    
+   
 }
 
 
