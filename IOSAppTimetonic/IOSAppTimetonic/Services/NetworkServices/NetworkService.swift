@@ -11,7 +11,9 @@ import Combine
 protocol NetworkServiceProtocol {
     func createAppKey() -> AnyPublisher<AppKeyResponseModel, NetworkError>
     func createOauthKey(login: String, pwd: String, appkey: String) -> AnyPublisher<OauthKeyResponseModel, NetworkError>
-    func createSesskey(o_u: String, oauthkey: String, restrictions: String) -> AnyPublisher<SessKeyResponseModel, NetworkError>}
+    func createSesskey(o_u: String, oauthkey: String, restrictions: String) -> AnyPublisher<SessKeyResponseModel, NetworkError>
+    func getAllBooks() -> AnyPublisher<APIResponse, NetworkError> 
+}
 
 
 // Network service for handling API requests with implementation protocol
