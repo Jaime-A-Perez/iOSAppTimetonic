@@ -11,6 +11,8 @@ import Combine
 
 // MockNetworkService should be defined to mimic the behavior of your actual network service, allowing you to control the output.
 class MockNetworkService: NetworkServiceProtocol {
+    var mockAllBooksResponse: Result<APIResponse, NetworkError>?
+    var mockAllBooksJSON: String?
     
     var mockAppKeyResponse: Result<AppKeyResponseModel, NetworkError>?
     var mockOauthKeyResponse: Result<OauthKeyResponseModel, NetworkError>?
@@ -18,8 +20,7 @@ class MockNetworkService: NetworkServiceProtocol {
     
     var mockAppKeyJSON: String?
     var mockOauthKeyJSON: String?
-    var mockSessKeyJSON: String?
-    
+    var mockSessKeyJSON: String?       
     
     
     func createOauthKey(login: String, pwd: String, appkey: String) -> AnyPublisher<OauthKeyResponseModel, NetworkError> {
@@ -42,6 +43,7 @@ class MockNetworkService: NetworkServiceProtocol {
         .eraseToAnyPublisher()
     }
     
+    
     func createSesskey(o_u: String, oauthkey: String, restrictions: String) -> AnyPublisher<SessKeyResponseModel, NetworkError> {
         let decoder = JSONDecoder()
         
@@ -63,8 +65,6 @@ class MockNetworkService: NetworkServiceProtocol {
     }
     
     
-    
-    
     func createAppKey() -> AnyPublisher<AppKeyResponseModel, NetworkError> {
         let decoder = JSONDecoder()
         
@@ -80,6 +80,33 @@ class MockNetworkService: NetworkServiceProtocol {
                 promise(.success(appKeyResponse))
             } catch {
                 promise(.failure(.decodingError))
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    
+    func getAllBooks() -> AnyPublisher<APIResponse, NetworkError> {
+        let decoder = JSONDecoder()
+        
+        return Future<APIResponse, NetworkError> { promise in
+            if let response = self.mockAllBooksResponse {
+                switch response {
+                case .success(let apiResponse):
+                    promise(.success(apiResponse))
+                case .failure(let error):
+                    promise(.failure(error))
+                }
+            } else if let json = self.mockAllBooksJSON {
+                do {
+                    let data = Data(json.utf8)
+                    let allBooksResponse = try decoder.decode(APIResponse.self, from: data)
+                    promise(.success(allBooksResponse))
+                } catch {
+                    promise(.failure(.decodingError))
+                }
+            } else {
+                promise(.failure(.invalidResponse))
             }
         }
         .eraseToAnyPublisher()
