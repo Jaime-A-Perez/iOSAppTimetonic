@@ -9,22 +9,30 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var authVerificationViewModel : AuthVerificationViewModel
+    @State var changeView = false
     
     var body: some View {
-        switch authVerificationViewModel.authenticationState {
-        case .checkingIfAlreadyAuthenticated:
-            ProgressView("Checking authentication...")
-                .scaleEffect(x:1.6, y:1.6, anchor: .center)
-                .tint(.blue)
-            if authVerificationViewModel.latestErrorMessage != "" {
-                Text(authVerificationViewModel.latestErrorMessage)
+        NavigationView{ 
+            switch authVerificationViewModel.authenticationState {
+            case .checkingIfAlreadyAuthenticated:
+                VStack{
+                    ProgressView("Checking authentication...")
+                        .scaleEffect(x:1.6, y:1.6, anchor: .center)
+                        .tint(.blue)
+                        .padding(.vertical, 310)
+                    if authVerificationViewModel.latestErrorMessage != "" {
+                        Text(authVerificationViewModel.keyManagementError)
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                    }
+                }
+            case .idle:
+                LoginView()
+            case .authenticated:
+                LandingPageView()
+            default:
+                LoginView()
             }
-        case .idle:
-            NavigationView{ LoginView() }
-        case .authenticated:
-            LandingPageView()
-        default:
-            NavigationView{ LoginView() }
         }
     }
 }
