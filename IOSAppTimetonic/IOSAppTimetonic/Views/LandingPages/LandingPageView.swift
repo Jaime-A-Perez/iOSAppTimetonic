@@ -11,32 +11,20 @@ struct LandingPageView: View {
     @StateObject private var landingPageViewModel = LandingPageViewModel(networkService: NetworkService())
     @StateObject private var authVerificationViewModel = AuthVerificationViewModel.shared
     @State private var isActiveOptions: Bool = false
-    @State private var logInActive: Bool = false
     
     var body: some View {
         VStack(spacing: 20) {
             header
-                .alert(isPresented: $isActiveOptions, content: {
-                    Alert(
-                        title: Text("Log out"),
-                        message: Text("\(Constants.API.userEmail)\nAre you sure you want log out?"),
-                        primaryButton: .cancel(),
-                        secondaryButton: .destructive(Text("Yes"), action: {
-                            logInActive = true
-                            authVerificationViewModel.sessKeyDelete()
-                        }))
-                })
-                .background(
-                    NavigationLink("", destination: LoginView(), isActive: $logInActive))
             
             listView
                 .cornerRadius(30)
                 .padding(.horizontal, 5)
-                .shadow(radius: 3)
+                .shadow(color: .primary.opacity(0.6), radius: 3)
         }
         .onAppear {
             landingPageViewModel.loadBooks()
         }
+        .navigationBarBackButtonHidden()
     }
     
     private var header: some View {
@@ -54,8 +42,18 @@ struct LandingPageView: View {
                     .frame(width: 26)
                     .foregroundColor(.secondary)
             })
+            .accessibilityLabel("Logout")
         }
         .padding(.horizontal, 24)
+        .alert(isPresented: $isActiveOptions, content: {
+            Alert(
+                title: Text("Log out"),
+                message: Text("\(Constants.API.userEmail)\nAre you sure you want log out?"),
+                primaryButton: .cancel(),
+                secondaryButton: .destructive(Text("Yes"), action: {
+                    authVerificationViewModel.sessKeyDelete()
+                }))
+        })
     }
     
     private var listView: some View {
@@ -82,12 +80,12 @@ struct LandingPageView: View {
             AsyncImage(url: coverImageUrl)
                 .frame(width: 100, height: 100)
                 .cornerRadius(8)
-                .shadow(radius: 6, x: -2, y: 2)
+                .shadow(color: .primary.opacity(0.6), radius: 6)
         } else {
             Image(systemName: "book.fill")
                 .frame(width: 100, height: 100)
                 .cornerRadius(8)
-                .shadow(radius: 6, x: -2, y: 2)
+                .shadow(radius: 6)
         }
     }
     
