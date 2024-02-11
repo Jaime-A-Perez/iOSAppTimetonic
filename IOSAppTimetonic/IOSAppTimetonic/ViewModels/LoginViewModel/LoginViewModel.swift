@@ -9,6 +9,7 @@ import Foundation
 
 // ViewModel for login, adheres to Single Responsibility Principle.
 class LoginViewModel: ObservableObject {
+    @Published var isActiveAuthView = false
     @Published var user = LoginModel(email: "", password: "")
     private var emailValidator: EmailValidating
     private var passwordValidator: PasswordValidating

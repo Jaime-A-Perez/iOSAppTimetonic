@@ -52,6 +52,9 @@ struct AuthVerificationView: View {
            
             Spacer()
         }
+        .background(
+            NavigationLink("", destination: LandingPageView(), isActive: $authVerificationViewModel.isAuthenticationComplete)
+        )
     }
 }
     

@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct IOSAppTimetonicApp: App {
+    @StateObject private var authVerificationViewModel = AuthVerificationViewModel.shared
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(authVerificationViewModel)
         }
     }
 }
