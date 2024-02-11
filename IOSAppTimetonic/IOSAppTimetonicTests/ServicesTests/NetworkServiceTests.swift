@@ -183,7 +183,4 @@ class NetworkServiceTests: XCTestCase {
         waitForExpectations(timeout: 1)
         cancellable.cancel()
     }
-
-
 }
-
